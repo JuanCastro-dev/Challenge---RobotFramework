@@ -1,57 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-03-16T10:53:53.083712" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-03-16T11:28:09.341864" rpa="false" schemaversion="5">
 <suite id="s1" name="Challenge---RobotFramework" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework">
 <suite id="s1-s1" name="Tests" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\tests">
 <suite id="s1-s1-s1" name="Login" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\tests\login.robot">
 <test id="s1-s1-s1-t1" name="Tl01 - Login válido" line="6">
 <kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-16T10:53:53.390583" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-16T11:28:09.525894" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-16T10:53:53.390185" elapsed="0.000429"/>
+<status status="PASS" start="2026-03-16T11:28:09.525171" elapsed="0.000767"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-16T10:53:53.390866" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-16T11:28:09.526352" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-16T10:53:53.390716" elapsed="0.000184"/>
+<status status="PASS" start="2026-03-16T11:28:09.526104" elapsed="0.000320"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-16T10:53:55.555593" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-16T11:28:10.379200" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
  body=b'{"email": "fulano@qa.com", "password": "teste"}' 
  </msg>
-<msg time="2026-03-16T10:53:55.555923" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-16T11:28:10.379505" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '50eca2c324c65cdc539ced31a5a932b7;o=1', 'date': 'Mon, 16 Mar 2026 13:54:04 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f55703b82c9772a242dd87db4f9e304a;o=1', 'date': 'Mon, 16 Mar 2026 14:28:19 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
  body={
     "message": "Login realizado com sucesso",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczNjY5MjQ0LCJleHAiOjE3NzM2Njk4NDR9.qyZv2UX5wFoEQxIx-OBh5uobzW-qEIwjlj4J4ESlndM"
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczNjcxMjk5LCJleHAiOjE3NzM2NzE4OTl9.1teqyMfC-TYMzBmr3p9ia2sFd9oPXNDuAamlMVw23KY"
 } 
  </msg>
+<msg time="2026-03-16T11:28:10.379810" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-16T10:53:53.390967" elapsed="2.165135"/>
+<status status="PASS" start="2026-03-16T11:28:09.526527" elapsed="0.853354"/>
 </kw>
-<status status="PASS" start="2026-03-16T10:53:53.389608" elapsed="2.166727"/>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-16T11:28:10.381757" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczNjcxMjk5LCJleHAiOjE3NzM...</msg>
+<var>${login_response_json}</var>
+<arg>${login_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-16T11:28:10.380279" elapsed="0.001556"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${login_response_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-16T11:28:10.382083" elapsed="0.001179"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-16T11:28:10.385081" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczNjcxMjk5LCJleHAiOjE3NzM2NzE4OTl9.1teqyMfC-TYMzBmr3p9ia2sFd9oPXNDuAamlMVw23KY</msg>
+<var>${TOKEN}</var>
+<arg>${login_response_json["authorization"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-16T11:28:10.383728" elapsed="0.001445"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-16T11:28:10.386429" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczNjcxMjk5LCJleHAiOjE3NzM2NzE4OTl9.1teqyMfC-TYMzBmr3p9ia2sFd9oPXNDuAamlMVw23KY</msg>
+<var>${TOKEN}</var>
+<arg>${TOKEN.replace("Bearer","").replace(" ","")}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-16T11:28:10.385440" elapsed="0.001046"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-16T11:28:10.387198" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczNjcxMjk5LCJleHAiOjE3NzM2NzE4OTl9.1teqyMfC-TYMzBmr3p9ia2sFd9oPXNDuAamlMVw23KY</msg>
+<arg>${TOKEN}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-16T11:28:10.386698" elapsed="0.000584"/>
+</kw>
+<status status="PASS" start="2026-03-16T11:28:09.524008" elapsed="0.863422"/>
 </kw>
 <doc>Realizar login com dados válidos e usuário cadastrado</doc>
 <tag>login</tag>
 <tag>valid</tag>
-<status status="PASS" start="2026-03-16T10:53:53.388567" elapsed="2.169774"/>
+<status status="PASS" start="2026-03-16T11:28:09.523415" elapsed="0.865043"/>
 </test>
 <doc>Essa suíte testa o endpoint /login da aplicação ServeRest</doc>
-<status status="PASS" start="2026-03-16T10:53:53.107125" elapsed="2.454071"/>
+<status status="PASS" start="2026-03-16T11:28:09.364081" elapsed="1.028517"/>
 </suite>
-<status status="PASS" start="2026-03-16T10:53:53.105599" elapsed="2.458759"/>
+<status status="PASS" start="2026-03-16T11:28:09.362989" elapsed="1.033454"/>
 </suite>
-<status status="PASS" start="2026-03-16T10:53:53.085968" elapsed="2.482838"/>
+<status status="PASS" start="2026-03-16T11:28:09.344116" elapsed="1.054955"/>
 </suite>
 <statistics>
 <total>
