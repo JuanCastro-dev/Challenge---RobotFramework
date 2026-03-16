@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-03-16T10:40:51.241902" rpa="false" schemaversion="5">
+<suite id="s1" name="Challenge---RobotFramework" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework">
+<suite id="s1-s1" name="Tests" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\tests">
+<suite id="s1-s1-s1" name="Login" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\tests\login.robot">
+<test id="s1-s1-s1-t1" name="Tl01 - Login válido" line="6">
+<kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-16T10:40:51.446650" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-16T10:40:51.446215" elapsed="0.000467"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-16T10:40:51.446945" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<arg>${body}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-16T10:40:51.446790" elapsed="0.000188"/>
+</kw>
+<status status="PASS" start="2026-03-16T10:40:51.445581" elapsed="0.001447"/>
+</kw>
+<doc>Realizar login com dados válidos e usuário cadastrado</doc>
+<tag>login</tag>
+<tag>valid</tag>
+<status status="PASS" start="2026-03-16T10:40:51.444643" elapsed="0.003074"/>
+</test>
+<doc>Essa suíte testa o endpoint /login da aplicação ServeRest</doc>
+<status status="PASS" start="2026-03-16T10:40:51.267017" elapsed="0.182764"/>
+</suite>
+<status status="PASS" start="2026-03-16T10:40:51.265892" elapsed="0.185879"/>
+</suite>
+<status status="PASS" start="2026-03-16T10:40:51.243787" elapsed="0.209908"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">login</stat>
+<stat pass="1" fail="0" skip="0">valid</stat>
+</tag>
+<suite>
+<stat name="Challenge---RobotFramework" id="s1" pass="1" fail="0" skip="0">Challenge---RobotFramework</stat>
+<stat name="Tests" id="s1-s1" pass="1" fail="0" skip="0">Challenge---RobotFramework.Tests</stat>
+<stat name="Login" id="s1-s1-s1" pass="1" fail="0" skip="0">Challenge---RobotFramework.Tests.Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
