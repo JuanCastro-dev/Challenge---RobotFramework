@@ -8,8 +8,8 @@ TC02 - Cadastrar um carrinho com sucesso
     [Documentation]    Cadastrar um carrinho com dados válidos e com um token válido
     [Tags]    cart    valid    post
     Fazer login com o email "fulano@qa.com" e a senha "teste"
-    Cadastrar Novo Produto   tablet   2500   eletrônicos   201
-    Cadastrar Novo Carrinho    BeeJh5lz3k6kSIzA    2    YaeJ455lz3k6kSIzA    3
+    Cadastrar Novo Produto   500   eletrodomésticos   105
+    Cadastrar Novo Carrinho    BeeJh5lz3k6kSIzA    2    ${ID_PRODUTO}    3
     
 TC11 - Cancelar uma compra com sucesso    
     [Documentation]    Cancelar uma compra, excluindo o carrinho e retornando os produtos ao estoque

@@ -10,7 +10,7 @@ ${CANCELAR}    carrinhos/cancelar-compra
 
 *** Keywords ***
 
-#Keywords para login
+#------------------------------------------- KeyWords para Login -------------------------------------------
 Fazer login com o email "${EMAIL}" e a senha "${PASSWORD}"
     ${body}    Create Dictionary
     ...    email=${EMAIL}
@@ -32,7 +32,8 @@ Fazer login com o email "${EMAIL}" e a senha "${PASSWORD}"
         Log To Console        O login com dados inválidos não foi realizado
     END
 
-#Keywords para produtos
+
+#------------------------------------------- KeyWords para Produtos -------------------------------------------
 Cadastrar Novo Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}
     
@@ -59,6 +60,8 @@ Cadastrar Novo Produto
         Log To Console    O produto com dados inválidos não foi cadastrado
     END
 
+
+#------------------------------------------- KeyWords para Carrinhos -------------------------------------------
 Cadastrar Novo Carrinho
     [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
     
