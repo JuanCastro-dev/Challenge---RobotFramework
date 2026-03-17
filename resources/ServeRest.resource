@@ -5,6 +5,7 @@ Library    Collections
 
 *** Variables ***
 ${URL}    https://compassuol.serverest.dev
+${CANCELAR}    carrinhos/cancelar-compra
 
 *** Keywords ***
 
@@ -64,3 +65,8 @@ Cadastrar Novo Carrinho
     ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=201   headers=&{headers}
 
     Log    ${response}
+
+Cancelar uma compra
+        &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}
+        
+        DELETE    url=${URL}/${CANCELAR}    headers=&{headers}
