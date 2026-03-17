@@ -1,6 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    RequestsLibrary
+Library    Collections
 
 *** Variables ***
 ${URL}    https://compassuol.serverest.dev
@@ -49,3 +50,17 @@ Cadastrar Novo Produto
     ELSE
         Log To Console    O produto com dados inválidos não foi cadastrado
     END
+
+Cadastrar Novo Carrinho
+    [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
+    
+    &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    &{produto1}    Create Dictionary        idProduto=${idProduto1}    quantidade=${quantidade1}
+    &{produto2}    Create Dictionary        idProduto=${idProduto2}    quantidade=${quantidade2}
+    @{produtos}    Create List              ${produto1}    ${produto2}
+    &{body}        Create Dictionary        produtos=${produtos}
+    
+    ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=201   headers=&{headers}
+
+    Log    ${response}
