@@ -7,6 +7,7 @@ ${URL}    https://compassuol.serverest.dev
 
 *** Keywords ***
 
+#Keywords para login
 Fazer login com o email "${EMAIL}" e a senha "${PASSWORD}"
     ${body}    Create Dictionary
     ...    email=${EMAIL}
@@ -20,10 +21,25 @@ Fazer login com o email "${EMAIL}" e a senha "${PASSWORD}"
 
         Log To Console  ${login_response_json}
 
-        ${TOKEN}    Set Variable    ${login_response_json["authorization"]}
-        ${TOKEN}    Set Variable    ${TOKEN.replace("Bearer","").replace(" ","")}
+        Set Test Variable   ${TOKEN}     ${login_response_json["authorization"]}
+        VAR    ${TOKEN}    ${TOKEN.replace("Bearer","").replace(" ","")}    scope=TEST
         
         Log    ${TOKEN}
     ELSE
         Log To Console        Não foi possivel realizar o login
     END
+
+#Keywords para produtos
+Cadastrar Novo Produto
+    [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}
+    
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+    
+    ${body}    Create Dictionary    
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+    Log    ${body}
+
+    POST    url=${URL}/produtos    json=${body}    expected_status=201  headers=&{headers}
