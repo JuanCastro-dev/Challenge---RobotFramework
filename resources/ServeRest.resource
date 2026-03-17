@@ -2,6 +2,7 @@
 Library    SeleniumLibrary
 Library    RequestsLibrary
 Library    Collections
+Library    String
 
 *** Variables ***
 ${URL}    https://compassuol.serverest.dev
@@ -33,12 +34,14 @@ Fazer login com o email "${EMAIL}" e a senha "${PASSWORD}"
 
 #Keywords para produtos
 Cadastrar Novo Produto
-    [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}
+    [Arguments]    ${preco}    ${descricao}    ${quantidade}
     
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${palavra_aleatoria}  Generate Random String    length=10  chars=[LETTERS]
     
     ${body}    Create Dictionary    
-    ...    nome=${nome}
+    ...    nome=${palavra_aleatoria}
     ...    preco=${preco}
     ...    descricao=${descricao}
     ...    quantidade=${quantidade}
@@ -47,7 +50,11 @@ Cadastrar Novo Produto
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=any  headers=&{headers}
     
     IF    ${response.status_code} == 201
-        Log To Console    ${response}
+        ${response_json}  Set Variable    ${response.json()}
+        VAR    ${ID_PRODUTO}    ${response_json["_id"]}    scope=TEST
+        
+        Log    ${ID_PRODUTO}
+
     ELSE
         Log To Console    O produto com dados inválidos não foi cadastrado
     END
@@ -64,9 +71,8 @@ Cadastrar Novo Carrinho
     
     ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=201   headers=&{headers}
 
-    Log    ${response}
 
 Cancelar uma compra
-        &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}
+    &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}
         
-        DELETE    url=${URL}/${CANCELAR}    headers=&{headers}
+    DELETE    url=${URL}/${CANCELAR}    headers=&{headers}
