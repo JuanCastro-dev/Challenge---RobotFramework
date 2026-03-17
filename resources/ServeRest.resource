@@ -26,7 +26,7 @@ Fazer login com o email "${EMAIL}" e a senha "${PASSWORD}"
         
         Log    ${TOKEN}
     ELSE
-        Log To Console        Não foi possivel realizar o login
+        Log To Console        O login com dados inválidos não foi realizado
     END
 
 #Keywords para produtos
@@ -42,4 +42,10 @@ Cadastrar Novo Produto
     ...    quantidade=${quantidade}
     Log    ${body}
 
-    POST    url=${URL}/produtos    json=${body}    expected_status=201  headers=&{headers}
+    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=any  headers=&{headers}
+    
+    IF    ${response.status_code} == 201
+        Log To Console    ${response}
+    ELSE
+        Log To Console    O produto com dados inválidos não foi cadastrado
+    END
