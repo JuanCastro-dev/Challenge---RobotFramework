@@ -127,7 +127,7 @@ Verificar se os produtos retornaram ao estoque
     Should Be Equal    ${produto_response.json()["quantidade"]}    ${QUANTIDADE_PRODUTO}
 
 
-#------------------------------------------- KeyWords para Carrinhos -------------------------------------------
+#------------------------------------------- KeyWords para POST em Carrinhos -------------------------------------------
 Cadastrar Novo Carrinho
     [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
     
@@ -142,7 +142,33 @@ Cadastrar Novo Carrinho
 
      VAR    ${QUANTIDADE_PRODUTO2_CARRINHO}            ${quantidade2}           scope=TEST
 
+Cadastrar Novo Carrinho Sem Token Válido
+    [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
+    &{headers}     Create Dictionary        Authorization=Bearer ${1516544121154691}    Content-Type=application/json
+
+    &{produto1}    Create Dictionary        idProduto=${idProduto1}    quantidade=${quantidade1}
+    &{produto2}    Create Dictionary        idProduto=${idProduto2}    quantidade=${quantidade2}
+    @{produtos}    Create List              ${produto1}    ${produto2}
+    &{body}        Create Dictionary        produtos=${produtos}
+
+    ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=401   headers=&{headers}
+    
+Cadastrar Novo Carrinho Inválido    
+
+    [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
+    
+    &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    &{produto1}    Create Dictionary        idProduto=${idProduto1}    quantidade=${quantidade1}
+    &{produto2}    Create Dictionary        idProduto=${idProduto2}    quantidade=${quantidade2}
+    @{produtos}    Create List              ${produto1}    ${produto2}
+    &{body}        Create Dictionary        produtos=${produtos}
+    
+    ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=400   headers=&{headers}
+    
+#------------------------------------------- KeyWords para DELETE em Carrinhos -------------------------------------------
+    
 Cancelar uma compra
     &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}
         
