@@ -19,7 +19,7 @@ TC03 - Cancelar uma compra com sucesso
     [Tags]    cart    valid    delete
 
     Cadastrar Novo Produto   500   eletrodomesticos   105
-    Cadastrar Novo Carrinho                           BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
+    Cadastrar Novo Carrinho                          BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
     Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
     Cancelar uma compra
     #Bug encontrado, a quantidade de produtos não corresponde
