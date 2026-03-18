@@ -76,6 +76,36 @@ Cadastrar Novo Produto Inválido
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=${status_esperado}  headers=&{headers}
 
+Cadastrar Novo Produto Com Nome Já Utilizado
+    [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+    Log    ${body}
+
+    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=400  headers=&{headers}
+
+Cadastrar Novo Produto Sem Permissão
+    [Arguments]    ${preco}    ${descricao}    ${quantidade}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${5235325436436}    Content-Type=application/json
+
+    ${palavra_aleatoria}  Generate Random String    length=10  chars=[LETTERS]
+
+    ${body}    Create Dictionary
+    ...    nome=${palavra_aleatoria}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+    Log    ${body}
+
+    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=401  headers=&{headers}
+
 Verificar a quantidade de produtos no estoque
     [Arguments]    ${id}    ${id_2}
 
