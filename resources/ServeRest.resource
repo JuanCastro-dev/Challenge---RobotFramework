@@ -5,8 +5,8 @@ Library    Collections
 Library    String
 
 *** Variables ***
-${URL}    https://compassuol.serverest.dev
-${CANCELAR}    carrinhos/cancelar-compra
+${URL}           https://compassuol.serverest.dev
+${CANCELAR}      carrinhos/cancelar-compra
 
 *** Keywords ***
 
@@ -57,13 +57,33 @@ Cadastrar Novo Produto
     
     IF    ${response.status_code} == 201
         ${response_json}  Set Variable    ${response.json()}
-        VAR    ${ID_PRODUTO}    ${response_json["_id"]}    scope=TEST
-        
-        Log    ${ID_PRODUTO}
+
+        VAR    ${ID_PRODUTO}            ${response_json["_id"]}           scope=TEST
+        VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}    scope=TEST
 
     ELSE
         Log To Console    O produto com dados inválidos não foi cadastrado
     END
+
+Verificar a quantidade de produtos no estoque
+    [Arguments]    ${id}    ${id_2}
+
+    ${produto_response}    GET    url=${URL}/produtos/${id}    expected_status=200
+    ${produto_response2}    GET    url=${URL}/produtos/${id_2}    expected_status=200
+    
+Verificar a quantidade de produtos no estoque após criação do carrinho    
+    [Arguments]    ${id}
+
+    ${produto_response}    GET    url=${URL}/produtos/${id}    expected_status=200
+    
+    ${quantidade_nova}    Evaluate    int(${QUANTIDADE_PRODUTO}) - int(${QUANTIDADE_PRODUTO2_CARRINHO})
+    Should Be Equal    ${quantidade_nova}        ${produto_response.json()["quantidade"]}
+
+Verificar se os produtos retornaram ao estoque
+    [Arguments]    ${id}
+
+    ${produto_response}    GET    url=${URL}/produtos/${id}    expected_status=200
+    Should Be Equal    ${produto_response.json()["quantidade"]}    ${QUANTIDADE_PRODUTO}
 
 
 #------------------------------------------- KeyWords para Carrinhos -------------------------------------------
@@ -79,8 +99,14 @@ Cadastrar Novo Carrinho
     
     ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=201   headers=&{headers}
 
+     VAR    ${QUANTIDADE_PRODUTO2_CARRINHO}            ${quantidade2}           scope=TEST
+
 
 Cancelar uma compra
     &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}
         
     DELETE    url=${URL}/${CANCELAR}    headers=&{headers}
+
+Fazer login com "fulano@qa.com" e garantir que não tenha carrinho já criado
+        Fazer login com o email "fulano@qa.com" e a senha "teste"
+        Cancelar uma compra
