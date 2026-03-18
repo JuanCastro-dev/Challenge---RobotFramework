@@ -17,21 +17,26 @@ Fazer login com o email "${EMAIL}" e a senha "${PASSWORD}"
     ...    password=${PASSWORD}
     Log    ${body}
 
-    ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=any
-    
-    IF    ${login_response.status_code} == 200
-        ${login_response_json}    Set Variable    ${login_response.json()}
+    ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=200
 
-        Log To Console  ${login_response_json}
+    ${login_response_json}    Set Variable    ${login_response.json()}
 
-        Set Test Variable   ${TOKEN}     ${login_response_json["authorization"]}
-        VAR    ${TOKEN}    ${TOKEN.replace("Bearer","").replace(" ","")}    scope=TEST
+    Log To Console  ${login_response_json}
+
+    Set Test Variable   ${TOKEN}     ${login_response_json["authorization"]}
+    VAR    ${TOKEN}    ${TOKEN.replace("Bearer","").replace(" ","")}    scope=TEST
         
-        Log    ${TOKEN}
-    ELSE
-        Log To Console        O login com dados inválidos não foi realizado
-    END
+    Log    ${TOKEN}
 
+Fazer login inválido com o email "${EMAIL}" e a senha "${PASSWORD}"
+    [Arguments]    ${status_esperado}
+    
+    ${body}    Create Dictionary
+    ...    email=${EMAIL}
+    ...    password=${PASSWORD}
+    Log    ${body}
+
+    ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=${status_esperado}
 
 #------------------------------------------- KeyWords para Produtos -------------------------------------------
 Cadastrar Novo Produto
