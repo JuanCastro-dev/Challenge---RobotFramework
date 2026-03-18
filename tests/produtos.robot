@@ -4,14 +4,14 @@ Resource    ../resources/ServeRest.resource
 
 *** Test Cases ***
 
-TP02 - Cadastrar um produto com dados válidos
+TP-01 - Cadastrar um produto com dados válidos
     [Documentation]    Cadastrar um produto com dados válidos e com admin autenticado
     [Tags]    products    valid
     Fazer login com o email "fulano@qa.com" e a senha "teste"
     Cadastrar Novo Produto   2500   eletrônicos   201
 
-TP03 - Cadastrar um produto com dados inválidos
+TP-02 - Cadastrar um produto com dados inválidos
     [Documentation]    Cadastrar um produto com dados inválidos e com admin autenticado
     [Tags]    products    invalid
     Fazer login com o email "fulano@qa.com" e a senha "teste"
-    Cadastrar Novo Produto   doismil   eletrônicos   trezentos
+    Cadastrar Novo Produto Inválido   doismil   eletrônicos   trezentos    400

@@ -53,17 +53,28 @@ Cadastrar Novo Produto
     ...    quantidade=${quantidade}
     Log    ${body}
 
-    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=any  headers=&{headers}
-    
-    IF    ${response.status_code} == 201
-        ${response_json}  Set Variable    ${response.json()}
+    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=201  headers=&{headers}
 
-        VAR    ${ID_PRODUTO}            ${response_json["_id"]}           scope=TEST
-        VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}    scope=TEST
+    ${response_json}  Set Variable    ${response.json()}
 
-    ELSE
-        Log To Console    O produto com dados inválidos não foi cadastrado
-    END
+    VAR    ${ID_PRODUTO}            ${response_json["_id"]}           scope=TEST
+    VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}    scope=TEST
+
+Cadastrar Novo Produto Inválido
+    [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${palavra_aleatoria}  Generate Random String    length=10  chars=[LETTERS]
+
+    ${body}    Create Dictionary
+    ...    nome=${palavra_aleatoria}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+    Log    ${body}
+
+    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=${status_esperado}  headers=&{headers}
 
 Verificar a quantidade de produtos no estoque
     [Arguments]    ${id}    ${id_2}
