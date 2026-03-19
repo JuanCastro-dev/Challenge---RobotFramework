@@ -191,6 +191,11 @@ Cancelar Uma Compra Token Inválido
 
     DELETE    url=${URL}/${CANCELAR}    headers=&{headers}    expected_status=401
 
+Cancelar Uma Compra Sem Carrinho Vinculado
+    &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}
+
+    DELETE    url=${URL}/${CANCELAR}    headers=&{headers}    expected_status=400
+
 Fazer login com "fulano@qa.com" e garantir que não tenha carrinho já criado
         Fazer login com o email "fulano@qa.com" e a senha "teste"
         Cancelar uma compra

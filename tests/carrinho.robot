@@ -58,3 +58,9 @@ TC-06 - Cancelar uma compra sem um token válido
     Cadastrar Novo Carrinho                          BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
     Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
     Cancelar Uma Compra Token Inválido
+
+TC-07 - Cancelar uma compra sem um carrinho existente
+    [Documentation]    Cancelar uma compra com um token sem carrinho vinculado
+    [Tags]    cart    invalid    delete
+
+    Cancelar Uma Compra Sem Carrinho Vinculado
