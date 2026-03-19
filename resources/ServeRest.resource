@@ -166,6 +166,18 @@ Cadastrar Novo Carrinho Inválido
     &{body}        Create Dictionary        produtos=${produtos}
     
     ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=400   headers=&{headers}
+
+Cadastrar Carrinho Novamente
+    [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
+
+    &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    &{produto1}    Create Dictionary        idProduto=${idProduto1}    quantidade=${quantidade1}
+    &{produto2}    Create Dictionary        idProduto=${idProduto2}    quantidade=${quantidade2}
+    @{produtos}    Create List              ${produto1}    ${produto2}
+    &{body}        Create Dictionary        produtos=${produtos}
+
+    ${response}    POST   url=${URL}/carrinhos   json=&{body}   expected_status=400   headers=&{headers}
     
 #------------------------------------------- KeyWords para DELETE em Carrinhos -------------------------------------------
     
@@ -173,6 +185,11 @@ Cancelar uma compra
     &{headers}     Create Dictionary        Authorization=Bearer ${TOKEN}
         
     DELETE    url=${URL}/${CANCELAR}    headers=&{headers}
+
+Cancelar Uma Compra Token Inválido
+    &{headers}     Create Dictionary        Authorization=Bearer ${151991154*91}
+
+    DELETE    url=${URL}/${CANCELAR}    headers=&{headers}    expected_status=401
 
 Fazer login com "fulano@qa.com" e garantir que não tenha carrinho já criado
         Fazer login com o email "fulano@qa.com" e a senha "teste"

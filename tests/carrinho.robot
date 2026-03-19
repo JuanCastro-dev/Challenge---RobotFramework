@@ -30,7 +30,16 @@ TC-03 - Cadastrar um carrinho com quantidade excedente de produtos
     Verificar a quantidade de produtos no estoque    BeeJh5lz3k6kSIzA    ${ID_PRODUTO}
     Cadastrar Novo Carrinho Inválido    BeeJh5lz3k6kSIzA    2    ${ID_PRODUTO}    200
     
-TC-04 - Cancelar uma compra com sucesso
+TC-04 - Cadastrar um carrinho com um token já vinculado
+    [Documentation]    Cadastrar um carrinho com dados válidos e com um token já vinculado a outro carrinho
+    [Tags]    cart    invalid    post
+
+    Cadastrar Novo Produto   500   eletrodomésticos   100
+    Verificar a quantidade de produtos no estoque    BeeJh5lz3k6kSIzA    ${ID_PRODUTO}
+    Cadastrar Novo Carrinho    BeeJh5lz3k6kSIzA    2    ${ID_PRODUTO}    3
+    Cadastrar Carrinho Novamente    BeeJh5lz3k6kSIzA    8    ${ID_PRODUTO}    4
+        
+TC-05 - Cancelar uma compra com sucesso
     [Documentation]    Cancelar uma compra, excluindo o carrinho e retornando os produtos ao estoque
     [Tags]    cart    valid    delete
 
@@ -40,3 +49,12 @@ TC-04 - Cancelar uma compra com sucesso
     Cancelar uma compra
     #Bug encontrado, a quantidade de produtos não corresponde
     Verificar se os produtos retornaram ao estoque    ${ID_PRODUTO}
+
+TC-06 - Cancelar uma compra sem um token válido
+    [Documentation]    Cancelar uma compra, excluindo o carrinho utilizando um token inválido
+    [Tags]    cart    invalid    delete
+
+    Cadastrar Novo Produto   500   eletrodomesticos   105
+    Cadastrar Novo Carrinho                          BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
+    Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
+    Cancelar Uma Compra Token Inválido
