@@ -1,504 +1,697 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-03-19T10:33:33.102606" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-03-25T11:44:40.188129" rpa="false" schemaversion="5">
 <suite id="s1" name="Produtos" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\tests\produtos.robot">
 <test id="s1-t1" name="TP-01 - Cadastrar um produto com dados válidos" line="7">
 <kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:33.320106" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-25T11:44:40.644510" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:33.319697" elapsed="0.000439"/>
+<status status="PASS" start="2026-03-25T11:44:40.644083" elapsed="0.000457"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:33.320422" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-25T11:44:40.644848" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:33.320246" elapsed="0.000217"/>
+<status status="PASS" start="2026-03-25T11:44:40.644664" elapsed="0.000227"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:33:34.851741" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-25T11:44:41.202635" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
  body=b'{"email": "fulano@qa.com", "password": "teste"}' 
  </msg>
-<msg time="2026-03-19T10:33:34.852056" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-25T11:44:41.202772" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '130713ab280f1cbdf2d0ca577097a866;o=1', 'date': 'Thu, 19 Mar 2026 13:33:45 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '2e58f38fb5f02014cc50a002ce1bb554;o=1', 'date': 'Wed, 25 Mar 2026 14:44:54 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
  body={
     "message": "Login realizado com sucesso",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI1LCJleHAiOjE3NzM5Mjc4MjV9.tXaghSj50LGwGG12sAkRrCnry0ERxKai8xMIAlqwQk4"
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk0LCJleHAiOjE3NzQ0NTA0OTR9.W9W5Hi-ghxXbLfSXBnz4I7pouO7ka4nMXvyppWOnrCg"
 } 
  </msg>
-<msg time="2026-03-19T10:33:34.852399" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-03-25T11:44:41.202918" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:33:33.320545" elapsed="1.531928"/>
+<status status="PASS" start="2026-03-25T11:44:40.644985" elapsed="0.557960"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:33:34.854359" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI1LCJleHAiOjE3NzM...</msg>
+<msg time="2026-03-25T11:44:41.203925" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk0LCJleHAiOjE3NzQ...</msg>
 <var>${login_response_json}</var>
 <arg>${login_response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.852858" elapsed="0.001577"/>
+<status status="PASS" start="2026-03-25T11:44:41.203138" elapsed="0.000816"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>${login_response_json}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.854721" elapsed="0.001061"/>
+<status status="PASS" start="2026-03-25T11:44:41.204065" elapsed="0.000510"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:33:34.858465" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI1LCJleHAiOjE3NzM5Mjc4MjV9.tXaghSj50LGwGG12sAkRrCnry0ERxKai8xMIAlqwQk4</msg>
+<msg time="2026-03-25T11:44:41.205524" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk0LCJleHAiOjE3NzQ0NTA0OTR9.W9W5Hi-ghxXbLfSXBnz4I7pouO7ka4nMXvyppWOnrCg</msg>
 <arg>${TOKEN}</arg>
 <arg>${login_response_json["authorization"]}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.856361" elapsed="0.002206"/>
+<status status="PASS" start="2026-03-25T11:44:41.204869" elapsed="0.000686"/>
 </kw>
 <variable name="${TOKEN}" scope="TEST">
-<msg time="2026-03-19T10:33:34.859386" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI1LCJleHAiOjE3NzM5Mjc4MjV9.tXaghSj50LGwGG12sAkRrCnry0ERxKai8xMIAlqwQk4</msg>
+<msg time="2026-03-25T11:44:41.205833" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk0LCJleHAiOjE3NzQ0NTA0OTR9.W9W5Hi-ghxXbLfSXBnz4I7pouO7ka4nMXvyppWOnrCg</msg>
 <var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
-<status status="PASS" start="2026-03-19T10:33:34.858700" elapsed="0.000744"/>
+<status status="PASS" start="2026-03-25T11:44:41.205600" elapsed="0.000255"/>
 </variable>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:34.860146" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI1LCJleHAiOjE3NzM5Mjc4MjV9.tXaghSj50LGwGG12sAkRrCnry0ERxKai8xMIAlqwQk4</msg>
+<msg time="2026-03-25T11:44:41.206130" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk0LCJleHAiOjE3NzQ0NTA0OTR9.W9W5Hi-ghxXbLfSXBnz4I7pouO7ka4nMXvyppWOnrCg</msg>
 <arg>${TOKEN}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.859718" elapsed="0.000513"/>
+<status status="PASS" start="2026-03-25T11:44:41.205953" elapsed="0.000209"/>
 </kw>
-<status status="PASS" start="2026-03-19T10:33:33.319030" elapsed="1.541344"/>
+<status status="PASS" start="2026-03-25T11:44:40.643268" elapsed="0.562952"/>
 </kw>
 <kw name="Cadastrar Novo Produto" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:34.862736" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI1LCJleHAiOjE3NzM5Mjc4MjV9.tXaghSj50LGwGG12sAkRrCnry0ERxKai8xM...</msg>
+<msg time="2026-03-25T11:44:41.207285" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk0LCJleHAiOjE3NzQ0NTA0OTR9.W9W5Hi-ghxXbLfSXBnz4I7pouO7ka4nMXvy...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.861987" elapsed="0.000813"/>
+<status status="PASS" start="2026-03-25T11:44:41.207043" elapsed="0.000262"/>
 </kw>
-<kw name="Generate Random String" owner="String">
-<msg time="2026-03-19T10:33:34.863559" level="INFO">${palavra_aleatoria} = LalhWwhWpE</msg>
+<kw name="Word" owner="FakerLibrary">
+<msg time="2026-03-25T11:44:41.207506" level="INFO">${palavra_aleatoria} = arrive</msg>
 <var>${palavra_aleatoria}</var>
-<arg>length=10</arg>
-<arg>chars=[LETTERS]</arg>
-<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.863033" elapsed="0.000580"/>
+<doc>Generate a word.</doc>
+<status status="PASS" start="2026-03-25T11:44:41.207382" elapsed="0.000140"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:34.864553" level="INFO">${body} = {'nome': 'LalhWwhWpE', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
+<msg time="2026-03-25T11:44:41.207816" level="INFO">${body} = {'nome': 'arrive', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
 <var>${body}</var>
 <arg>nome=${palavra_aleatoria}</arg>
 <arg>preco=${preco}</arg>
 <arg>descricao=${descricao}</arg>
 <arg>quantidade=${quantidade}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.863837" elapsed="0.000775"/>
+<status status="PASS" start="2026-03-25T11:44:41.207591" elapsed="0.000243"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:34.865248" level="INFO">{'nome': 'LalhWwhWpE', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
+<msg time="2026-03-25T11:44:41.208035" level="INFO">{'nome': 'arrive', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.864854" elapsed="0.000474"/>
+<status status="PASS" start="2026-03-25T11:44:41.207905" elapsed="0.000158"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:33:35.392449" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:41.646324" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
  path_url=/produtos 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI1LCJleHAiOjE3NzM5Mjc4MjV9.tXaghSj50LGwGG12sAkRrCnry0ERxKai8xMIAlqwQk4', 'Content-Type': 'application/json', 'Content-Length': '93'} 
- body=b'{"nome": "LalhWwhWpE", "preco": "2500", "descricao": "eletr\\u00f4nicos", "quantidade": "201"}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk0LCJleHAiOjE3NzQ0NTA0OTR9.W9W5Hi-ghxXbLfSXBnz4I7pouO7ka4nMXvyppWOnrCg', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"nome": "arrive", "preco": "2500", "descricao": "eletr\\u00f4nicos", "quantidade": "201"}' 
  </msg>
-<msg time="2026-03-19T10:33:35.392832" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:41.646476" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
  status=201, reason=Created 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '6cba2123b2dea44ef2d0ca577097a494', 'date': 'Thu, 19 Mar 2026 13:33:46 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '2be9773ff7e78f2acc50a002ce1bb749', 'date': 'Wed, 25 Mar 2026 14:44:54 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
  body={
     "message": "Cadastro realizado com sucesso",
-    "_id": "fRdQ13gKl81oAoD0"
+    "_id": "0M0mH5oFLUHChI7p"
 } 
  </msg>
-<msg time="2026-03-19T10:33:35.393248" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2026-03-25T11:44:41.646715" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/produtos</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=201</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:33:34.865522" elapsed="0.527797"/>
+<status status="PASS" start="2026-03-25T11:44:41.208130" elapsed="0.438628"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.395067" level="INFO">${response_json} = {'message': 'Cadastro realizado com sucesso', '_id': 'fRdQ13gKl81oAoD0'}</msg>
+<msg time="2026-03-25T11:44:41.647783" level="INFO">${response_json} = {'message': 'Cadastro realizado com sucesso', '_id': '0M0mH5oFLUHChI7p'}</msg>
 <var>${response_json}</var>
 <arg>${response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.393705" elapsed="0.001422"/>
+<status status="PASS" start="2026-03-25T11:44:41.647039" elapsed="0.000772"/>
 </kw>
 <variable name="${ID_PRODUTO}" scope="TEST">
-<msg time="2026-03-19T10:33:35.396072" level="INFO">${ID_PRODUTO} = fRdQ13gKl81oAoD0</msg>
+<msg time="2026-03-25T11:44:41.648679" level="INFO">${ID_PRODUTO} = 0M0mH5oFLUHChI7p</msg>
 <var>${response_json["_id"]}</var>
-<status status="PASS" start="2026-03-19T10:33:35.395268" elapsed="0.000868"/>
+<status status="PASS" start="2026-03-25T11:44:41.647872" elapsed="0.000852"/>
 </variable>
 <variable name="${QUANTIDADE_PRODUTO}" scope="TEST">
-<msg time="2026-03-19T10:33:35.396485" level="INFO">${QUANTIDADE_PRODUTO} = 201</msg>
+<msg time="2026-03-25T11:44:41.648892" level="INFO">${QUANTIDADE_PRODUTO} = 201</msg>
 <var>${quantidade}</var>
-<status status="PASS" start="2026-03-19T10:33:35.396279" elapsed="0.000254"/>
+<status status="PASS" start="2026-03-25T11:44:41.648807" elapsed="0.000104"/>
 </variable>
 <arg>2500</arg>
 <arg>eletrônicos</arg>
 <arg>201</arg>
-<status status="PASS" start="2026-03-19T10:33:34.861377" elapsed="0.535295"/>
+<status status="PASS" start="2026-03-25T11:44:41.206787" elapsed="0.442192"/>
 </kw>
 <doc>Cadastrar um produto com dados válidos e com admin autenticado</doc>
 <tag>products</tag>
 <tag>valid</tag>
-<status status="PASS" start="2026-03-19T10:33:33.318172" elapsed="2.079419"/>
+<status status="PASS" start="2026-03-25T11:44:40.641682" elapsed="1.007740"/>
 </test>
 <test id="s1-t2" name="TP-02 - Cadastrar um produto com dados inválidos" line="14">
 <kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.402771" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-25T11:44:41.651695" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.402027" elapsed="0.000804"/>
+<status status="PASS" start="2026-03-25T11:44:41.651358" elapsed="0.000364"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.403494" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-25T11:44:41.652025" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.403072" elapsed="0.000504"/>
+<status status="PASS" start="2026-03-25T11:44:41.651830" elapsed="0.000246"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:33:35.938883" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-25T11:44:42.107542" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
  body=b'{"email": "fulano@qa.com", "password": "teste"}' 
  </msg>
-<msg time="2026-03-19T10:33:35.939096" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-25T11:44:42.107746" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'e9bdab6661e61202f2d0ca577097a2f0', 'date': 'Thu, 19 Mar 2026 13:33:46 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '51c3672b936128e8cc50a002ce1bb00f', 'date': 'Wed, 25 Mar 2026 14:44:55 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
  body={
     "message": "Login realizado com sucesso",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI2LCJleHAiOjE3NzM5Mjc4MjZ9.JNJciZIaMewQli7mljjq50C1XYzCTXgJXtUZ2pYh-KA"
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk1LCJleHAiOjE3NzQ0NTA0OTV9.5r9UHrcE5__budoR7LA3rCqCWRGjScL3j5gecpUXvh8"
 } 
  </msg>
-<msg time="2026-03-19T10:33:35.939373" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-03-25T11:44:42.108021" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.403766" elapsed="0.535671"/>
+<status status="PASS" start="2026-03-25T11:44:41.652201" elapsed="0.455881"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.941124" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI2LCJleHAiOjE3NzM...</msg>
+<msg time="2026-03-25T11:44:42.109945" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk1LCJleHAiOjE3NzQ...</msg>
 <var>${login_response_json}</var>
 <arg>${login_response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.939845" elapsed="0.001338"/>
+<status status="PASS" start="2026-03-25T11:44:42.108543" elapsed="0.001470"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>${login_response_json}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.941417" elapsed="0.001031"/>
+<status status="PASS" start="2026-03-25T11:44:42.110311" elapsed="0.000867"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.944793" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI2LCJleHAiOjE3NzM5Mjc4MjZ9.JNJciZIaMewQli7mljjq50C1XYzCTXgJXtUZ2pYh-KA</msg>
+<msg time="2026-03-25T11:44:42.113816" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk1LCJleHAiOjE3NzQ0NTA0OTV9.5r9UHrcE5__budoR7LA3rCqCWRGjScL3j5gecpUXvh8</msg>
 <arg>${TOKEN}</arg>
 <arg>${login_response_json["authorization"]}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.942841" elapsed="0.002052"/>
+<status status="PASS" start="2026-03-25T11:44:42.111626" elapsed="0.002309"/>
 </kw>
 <variable name="${TOKEN}" scope="TEST">
-<msg time="2026-03-19T10:33:35.945635" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI2LCJleHAiOjE3NzM5Mjc4MjZ9.JNJciZIaMewQli7mljjq50C1XYzCTXgJXtUZ2pYh-KA</msg>
+<msg time="2026-03-25T11:44:42.114749" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk1LCJleHAiOjE3NzQ0NTA0OTV9.5r9UHrcE5__budoR7LA3rCqCWRGjScL3j5gecpUXvh8</msg>
 <var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
-<status status="PASS" start="2026-03-19T10:33:35.945011" elapsed="0.000682"/>
+<status status="PASS" start="2026-03-25T11:44:42.114069" elapsed="0.000811"/>
 </variable>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.946340" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI2LCJleHAiOjE3NzM5Mjc4MjZ9.JNJciZIaMewQli7mljjq50C1XYzCTXgJXtUZ2pYh-KA</msg>
+<msg time="2026-03-25T11:44:42.115686" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk1LCJleHAiOjE3NzQ0NTA0OTV9.5r9UHrcE5__budoR7LA3rCqCWRGjScL3j5gecpUXvh8</msg>
 <arg>${TOKEN}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.945924" elapsed="0.000501"/>
+<status status="PASS" start="2026-03-25T11:44:42.115159" elapsed="0.000637"/>
 </kw>
-<status status="PASS" start="2026-03-19T10:33:35.401488" elapsed="0.545060"/>
+<status status="PASS" start="2026-03-25T11:44:41.651057" elapsed="0.464879"/>
 </kw>
 <kw name="Cadastrar Novo Produto Inválido" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.949471" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI2LCJleHAiOjE3NzM5Mjc4MjZ9.JNJciZIaMewQli7mljjq50C1XYzCTXgJXtU...</msg>
+<msg time="2026-03-25T11:44:42.119700" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk1LCJleHAiOjE3NzQ0NTA0OTV9.5r9UHrcE5__budoR7LA3rCqCWRGjScL3j5g...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.948506" elapsed="0.001038"/>
+<status status="PASS" start="2026-03-25T11:44:42.118712" elapsed="0.001194"/>
 </kw>
 <kw name="Generate Random String" owner="String">
-<msg time="2026-03-19T10:33:35.952769" level="INFO">${palavra_aleatoria} = VAYUGrdERJ</msg>
+<msg time="2026-03-25T11:44:42.121098" level="INFO">${palavra_aleatoria} = qArWsEotAy</msg>
 <var>${palavra_aleatoria}</var>
 <arg>length=10</arg>
 <arg>chars=[LETTERS]</arg>
 <doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.949827" elapsed="0.003031"/>
+<status status="PASS" start="2026-03-25T11:44:42.120296" elapsed="0.000877"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.954793" level="INFO">${body} = {'nome': 'VAYUGrdERJ', 'preco': 'doismil', 'descricao': 'eletrônicos', 'quantidade': 'trezentos'}</msg>
+<msg time="2026-03-25T11:44:42.123448" level="INFO">${body} = {'nome': 'qArWsEotAy', 'preco': 'doismil', 'descricao': 'eletrônicos', 'quantidade': 'trezentos'}</msg>
 <var>${body}</var>
 <arg>nome=${palavra_aleatoria}</arg>
 <arg>preco=${preco}</arg>
 <arg>descricao=${descricao}</arg>
 <arg>quantidade=${quantidade}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.953631" elapsed="0.001238"/>
+<status status="PASS" start="2026-03-25T11:44:42.121485" elapsed="0.002125"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:35.955667" level="INFO">{'nome': 'VAYUGrdERJ', 'preco': 'doismil', 'descricao': 'eletrônicos', 'quantidade': 'trezentos'}</msg>
+<msg time="2026-03-25T11:44:42.124543" level="INFO">{'nome': 'qArWsEotAy', 'preco': 'doismil', 'descricao': 'eletrônicos', 'quantidade': 'trezentos'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.955212" elapsed="0.000545"/>
+<status status="PASS" start="2026-03-25T11:44:42.123992" elapsed="0.000651"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:33:36.491984" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:42.641686" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
  path_url=/produtos 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI2LCJleHAiOjE3NzM5Mjc4MjZ9.JNJciZIaMewQli7mljjq50C1XYzCTXgJXtUZ2pYh-KA', 'Content-Type': 'application/json', 'Content-Length': '102'} 
- body=b'{"nome": "VAYUGrdERJ", "preco": "doismil", "descricao": "eletr\\u00f4nicos", "quantidade": "trezentos"}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk1LCJleHAiOjE3NzQ0NTA0OTV9.5r9UHrcE5__budoR7LA3rCqCWRGjScL3j5gecpUXvh8', 'Content-Type': 'application/json', 'Content-Length': '102'} 
+ body=b'{"nome": "qArWsEotAy", "preco": "doismil", "descricao": "eletr\\u00f4nicos", "quantidade": "trezentos"}' 
  </msg>
-<msg time="2026-03-19T10:33:36.492217" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:42.641897" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
  status=400, reason=Bad Request 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'b9f2927959debe19f2d0ca577097aba1', 'date': 'Thu, 19 Mar 2026 13:33:47 GMT', 'server': 'Google Frontend', 'Content-Length': '96'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'b1a174300563e82acc50a002ce1bb24b', 'date': 'Wed, 25 Mar 2026 14:44:55 GMT', 'server': 'Google Frontend', 'Content-Length': '96'} 
  body={
     "preco": "preco deve ser um número",
     "quantidade": "quantidade deve ser um número"
 } 
  </msg>
-<msg time="2026-03-19T10:33:36.492526" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-03-25T11:44:42.642179" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/produtos</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=${status_esperado}</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:33:35.955964" elapsed="0.536627"/>
+<status status="PASS" start="2026-03-25T11:44:42.124878" elapsed="0.517366"/>
 </kw>
 <arg>doismil</arg>
 <arg>eletrônicos</arg>
 <arg>trezentos</arg>
 <arg>400</arg>
-<status status="PASS" start="2026-03-19T10:33:35.947397" elapsed="0.545417"/>
+<status status="PASS" start="2026-03-25T11:44:42.117397" elapsed="0.525064"/>
 </kw>
 <doc>Cadastrar um produto com dados inválidos e com admin autenticado</doc>
 <tag>invalid</tag>
 <tag>products</tag>
-<status status="PASS" start="2026-03-19T10:33:35.399957" elapsed="1.093599"/>
+<status status="PASS" start="2026-03-25T11:44:41.650409" elapsed="0.992903"/>
 </test>
 <test id="s1-t3" name="TP-03 - Cadastrar um produto com nome já utilizado" line="21">
 <kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:36.497597" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-25T11:44:42.648120" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:36.496810" elapsed="0.000895"/>
+<status status="PASS" start="2026-03-25T11:44:42.647294" elapsed="0.000896"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:36.498703" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-03-25T11:44:42.649126" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:36.498225" elapsed="0.000576"/>
+<status status="PASS" start="2026-03-25T11:44:42.648473" elapsed="0.000793"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:33:37.013655" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-25T11:44:43.136317" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
  body=b'{"email": "fulano@qa.com", "password": "teste"}' 
  </msg>
-<msg time="2026-03-19T10:33:37.013865" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-03-25T11:44:43.136544" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '69f0879203aef1ace224c800eb2bb803', 'date': 'Thu, 19 Mar 2026 13:33:47 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'dc50c022dad22e32cc50a002ce1bb802', 'date': 'Wed, 25 Mar 2026 14:44:56 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
  body={
     "message": "Login realizado com sucesso",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI3LCJleHAiOjE3NzM5Mjc4Mjd9.4A13BNLvzqUoRQvmzQIa66BERZDdePFY7ZHex7mDVlQ"
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk2LCJleHAiOjE3NzQ0NTA0OTZ9.Zvnc3yw_6FuBI3-vv0gsc05HRA31Ey5sGEq0ut3JATw"
 } 
  </msg>
-<msg time="2026-03-19T10:33:37.014181" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-03-25T11:44:43.136828" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:33:36.499021" elapsed="0.515228"/>
+<status status="PASS" start="2026-03-25T11:44:42.649589" elapsed="0.487304"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.016334" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI3LCJleHAiOjE3NzM...</msg>
+<msg time="2026-03-25T11:44:43.138794" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk2LCJleHAiOjE3NzQ...</msg>
 <var>${login_response_json}</var>
 <arg>${login_response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.014627" elapsed="0.001780"/>
+<status status="PASS" start="2026-03-25T11:44:43.137310" elapsed="0.001556"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>${login_response_json}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.016693" elapsed="0.000959"/>
+<status status="PASS" start="2026-03-25T11:44:43.139150" elapsed="0.001042"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.020211" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI3LCJleHAiOjE3NzM5Mjc4Mjd9.4A13BNLvzqUoRQvmzQIa66BERZDdePFY7ZHex7mDVlQ</msg>
+<msg time="2026-03-25T11:44:43.142795" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk2LCJleHAiOjE3NzQ0NTA0OTZ9.Zvnc3yw_6FuBI3-vv0gsc05HRA31Ey5sGEq0ut3JATw</msg>
 <arg>${TOKEN}</arg>
 <arg>${login_response_json["authorization"]}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.018118" elapsed="0.002207"/>
+<status status="PASS" start="2026-03-25T11:44:43.140727" elapsed="0.002168"/>
 </kw>
 <variable name="${TOKEN}" scope="TEST">
-<msg time="2026-03-19T10:33:37.021096" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI3LCJleHAiOjE3NzM5Mjc4Mjd9.4A13BNLvzqUoRQvmzQIa66BERZDdePFY7ZHex7mDVlQ</msg>
+<msg time="2026-03-25T11:44:43.144460" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk2LCJleHAiOjE3NzQ0NTA0OTZ9.Zvnc3yw_6FuBI3-vv0gsc05HRA31Ey5sGEq0ut3JATw</msg>
 <var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
-<status status="PASS" start="2026-03-19T10:33:37.020465" elapsed="0.000688"/>
+<status status="PASS" start="2026-03-25T11:44:43.143019" elapsed="0.001559"/>
 </variable>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.021874" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI3LCJleHAiOjE3NzM5Mjc4Mjd9.4A13BNLvzqUoRQvmzQIa66BERZDdePFY7ZHex7mDVlQ</msg>
+<msg time="2026-03-25T11:44:43.145903" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk2LCJleHAiOjE3NzQ0NTA0OTZ9.Zvnc3yw_6FuBI3-vv0gsc05HRA31Ey5sGEq0ut3JATw</msg>
 <arg>${TOKEN}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.021403" elapsed="0.000562"/>
+<status status="PASS" start="2026-03-25T11:44:43.145155" elapsed="0.000876"/>
 </kw>
-<status status="PASS" start="2026-03-19T10:33:36.496206" elapsed="0.525890"/>
+<status status="PASS" start="2026-03-25T11:44:42.646721" elapsed="0.499472"/>
 </kw>
 <kw name="Cadastrar Novo Produto Com Nome Já Utilizado" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.024675" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI3LCJleHAiOjE3NzM5Mjc4Mjd9.4A13BNLvzqUoRQvmzQIa66BERZDdePFY7ZH...</msg>
+<msg time="2026-03-25T11:44:43.148545" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk2LCJleHAiOjE3NzQ0NTA0OTZ9.Zvnc3yw_6FuBI3-vv0gsc05HRA31Ey5sGEq...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.023854" elapsed="0.000892"/>
+<status status="PASS" start="2026-03-25T11:44:43.147799" elapsed="0.000805"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.025759" level="INFO">${body} = {'nome': 'Logitech MX Vertical', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
+<msg time="2026-03-25T11:44:43.149562" level="INFO">${body} = {'nome': 'Logitech MX Vertical', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
 <var>${body}</var>
 <arg>nome=${nome}</arg>
 <arg>preco=${preco}</arg>
 <arg>descricao=${descricao}</arg>
 <arg>quantidade=${quantidade}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.025048" elapsed="0.000765"/>
+<status status="PASS" start="2026-03-25T11:44:43.148893" elapsed="0.000718"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.026419" level="INFO">{'nome': 'Logitech MX Vertical', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
+<msg time="2026-03-25T11:44:43.150439" level="INFO">{'nome': 'Logitech MX Vertical', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.026030" elapsed="0.000477"/>
+<status status="PASS" start="2026-03-25T11:44:43.149824" elapsed="0.000711"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:33:37.565234" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:43.598915" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
  path_url=/produtos 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MjI3LCJleHAiOjE3NzM5Mjc4Mjd9.4A13BNLvzqUoRQvmzQIa66BERZDdePFY7ZHex7mDVlQ', 'Content-Type': 'application/json', 'Content-Length': '103'} 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk2LCJleHAiOjE3NzQ0NTA0OTZ9.Zvnc3yw_6FuBI3-vv0gsc05HRA31Ey5sGEq0ut3JATw', 'Content-Type': 'application/json', 'Content-Length': '103'} 
  body=b'{"nome": "Logitech MX Vertical", "preco": "2500", "descricao": "eletr\\u00f4nicos", "quantidade": "201"}' 
  </msg>
-<msg time="2026-03-19T10:33:37.565453" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:43.599321" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
  status=400, reason=Bad Request 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '5dac69f92b09ff5ee224c800eb2bb92c', 'date': 'Thu, 19 Mar 2026 13:33:48 GMT', 'server': 'Google Frontend', 'Content-Length': '53'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '22e309eb0c01ec80cc50a002ce1bb828', 'date': 'Wed, 25 Mar 2026 14:44:56 GMT', 'server': 'Google Frontend', 'Content-Length': '53'} 
  body={
     "message": "Já existe produto com esse nome"
 } 
  </msg>
-<msg time="2026-03-19T10:33:37.565732" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-03-25T11:44:43.599692" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/produtos</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=400</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.026696" elapsed="0.539142"/>
+<status status="PASS" start="2026-03-25T11:44:43.150939" elapsed="0.448825"/>
 </kw>
 <arg>Logitech MX Vertical</arg>
 <arg>2500</arg>
 <arg>eletrônicos</arg>
 <arg>201</arg>
-<status status="PASS" start="2026-03-19T10:33:37.023104" elapsed="0.542950"/>
+<status status="PASS" start="2026-03-25T11:44:43.147139" elapsed="0.452888"/>
 </kw>
 <doc>Cadastrar um produto com nome já utilizado e com admin autenticado</doc>
 <tag>invalid</tag>
 <tag>products</tag>
-<status status="PASS" start="2026-03-19T10:33:36.494803" elapsed="1.072150"/>
+<status status="PASS" start="2026-03-25T11:44:42.645091" elapsed="0.955742"/>
 </test>
 <test id="s1-t4" name="TP-04 - Cadastrar um produto sem permissão" line="28">
 <kw name="Cadastrar Novo Produto Sem Permissão" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.571153" level="INFO">&amp;{headers} = { Authorization=Bearer 5235325436436 | Content-Type=application/json }</msg>
+<msg time="2026-03-25T11:44:43.606489" level="INFO">&amp;{headers} = { Authorization=Bearer 5235325436436 | Content-Type=application/json }</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${5235325436436}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.569911" elapsed="0.001310"/>
+<status status="PASS" start="2026-03-25T11:44:43.605304" elapsed="0.001260"/>
 </kw>
 <kw name="Generate Random String" owner="String">
-<msg time="2026-03-19T10:33:37.571852" level="INFO">${palavra_aleatoria} = fARatlVwWd</msg>
+<msg time="2026-03-25T11:44:43.607260" level="INFO">${palavra_aleatoria} = ZRBtGSLpEI</msg>
 <var>${palavra_aleatoria}</var>
 <arg>length=10</arg>
 <arg>chars=[LETTERS]</arg>
 <doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.571474" elapsed="0.000430"/>
+<status status="PASS" start="2026-03-25T11:44:43.606874" elapsed="0.000435"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.574152" level="INFO">${body} = {'nome': 'fARatlVwWd', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '300'}</msg>
+<msg time="2026-03-25T11:44:43.608256" level="INFO">${body} = {'nome': 'ZRBtGSLpEI', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '300'}</msg>
 <var>${body}</var>
 <arg>nome=${palavra_aleatoria}</arg>
 <arg>preco=${preco}</arg>
 <arg>descricao=${descricao}</arg>
 <arg>quantidade=${quantidade}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.572134" elapsed="0.002116"/>
+<status status="PASS" start="2026-03-25T11:44:43.607528" elapsed="0.000780"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:33:37.575224" level="INFO">{'nome': 'fARatlVwWd', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '300'}</msg>
+<msg time="2026-03-25T11:44:43.608936" level="INFO">{'nome': 'ZRBtGSLpEI', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '300'}</msg>
 <arg>${body}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.574601" elapsed="0.000740"/>
+<status status="PASS" start="2026-03-25T11:44:43.608534" elapsed="0.000484"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:33:38.116036" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:44.103210" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
  path_url=/produtos 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 5235325436436', 'Content-Type': 'application/json', 'Content-Length': '93'} 
- body=b'{"nome": "fARatlVwWd", "preco": "2500", "descricao": "eletr\\u00f4nicos", "quantidade": "300"}' 
+ body=b'{"nome": "ZRBtGSLpEI", "preco": "2500", "descricao": "eletr\\u00f4nicos", "quantidade": "300"}' 
  </msg>
-<msg time="2026-03-19T10:33:38.116250" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-03-25T11:44:44.103416" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
  status=401, reason=Unauthorized 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'cff4414241d8b0b3e224c800eb2bbcbe', 'date': 'Thu, 19 Mar 2026 13:33:49 GMT', 'server': 'Google Frontend', 'Content-Length': '103'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '3ab71deb9a8c30e1cc50a002ce1bb48c', 'date': 'Wed, 25 Mar 2026 14:44:57 GMT', 'server': 'Google Frontend', 'Content-Length': '103'} 
  body={
     "message": "Token de acesso ausente, inválido, expirado ou usuário do token não existe mais"
 } 
  </msg>
-<msg time="2026-03-19T10:33:38.116534" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<msg time="2026-03-25T11:44:44.103720" level="INFO">${response} = &lt;Response [401]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/produtos</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=401</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:33:37.575837" elapsed="0.540761"/>
+<status status="PASS" start="2026-03-25T11:44:43.609216" elapsed="0.494570"/>
 </kw>
 <arg>2500</arg>
 <arg>eletrônicos</arg>
 <arg>300</arg>
-<status status="PASS" start="2026-03-19T10:33:37.569296" elapsed="0.547549"/>
+<status status="PASS" start="2026-03-25T11:44:43.604682" elapsed="0.499342"/>
 </kw>
 <doc>Cadastrar um produto com dados válidos e sem admin autenticado</doc>
 <tag>invalid</tag>
 <tag>products</tag>
-<status status="PASS" start="2026-03-19T10:33:37.568180" elapsed="0.549516"/>
+<status status="PASS" start="2026-03-25T11:44:43.603258" elapsed="0.501552"/>
+</test>
+<test id="s1-t5" name="TP-05 - Buscar Produto Com ID Válido" line="34">
+<kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.108609" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.107787" elapsed="0.000895"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.109413" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<arg>${body}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.108960" elapsed="0.000548"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-03-25T11:44:44.572690" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com", "password": "teste"}' 
+ </msg>
+<msg time="2026-03-25T11:44:44.572953" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'dac77c7231e17db5cc50a002ce1bba66', 'date': 'Wed, 25 Mar 2026 14:44:57 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk3LCJleHAiOjE3NzQ0NTA0OTd9.wVQhYVypexq4St5mHFSiXk4Qnd2DvAlUkAyCtpndjRA"
+} 
+ </msg>
+<msg time="2026-03-25T11:44:44.573272" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<var>${login_response}</var>
+<arg>url=${URL}/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.110061" elapsed="0.463279"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.574967" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk3LCJleHAiOjE3NzQ...</msg>
+<var>${login_response_json}</var>
+<arg>${login_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.573716" elapsed="0.001307"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${login_response_json}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.575286" elapsed="0.000858"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.579005" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk3LCJleHAiOjE3NzQ0NTA0OTd9.wVQhYVypexq4St5mHFSiXk4Qnd2DvAlUkAyCtpndjRA</msg>
+<arg>${TOKEN}</arg>
+<arg>${login_response_json["authorization"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.576493" elapsed="0.002673"/>
+</kw>
+<variable name="${TOKEN}" scope="TEST">
+<msg time="2026-03-25T11:44:44.580692" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk3LCJleHAiOjE3NzQ0NTA0OTd9.wVQhYVypexq4St5mHFSiXk4Qnd2DvAlUkAyCtpndjRA</msg>
+<var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
+<status status="PASS" start="2026-03-25T11:44:44.579552" elapsed="0.001224"/>
+</variable>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.581630" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk3LCJleHAiOjE3NzQ0NTA0OTd9.wVQhYVypexq4St5mHFSiXk4Qnd2DvAlUkAyCtpndjRA</msg>
+<arg>${TOKEN}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.581080" elapsed="0.000756"/>
+</kw>
+<status status="PASS" start="2026-03-25T11:44:44.107191" elapsed="0.474803"/>
+</kw>
+<kw name="Cadastrar Novo Produto" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.584402" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk3LCJleHAiOjE3NzQ0NTA0OTd9.wVQhYVypexq4St5mHFSiXk4Qnd2DvAlUkAy...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.583608" elapsed="0.000865"/>
+</kw>
+<kw name="Word" owner="FakerLibrary">
+<msg time="2026-03-25T11:44:44.585784" level="INFO">${palavra_aleatoria} = shoulder</msg>
+<var>${palavra_aleatoria}</var>
+<doc>Generate a word.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.585182" elapsed="0.000667"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.587026" level="INFO">${body} = {'nome': 'shoulder', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
+<var>${body}</var>
+<arg>nome=${palavra_aleatoria}</arg>
+<arg>preco=${preco}</arg>
+<arg>descricao=${descricao}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.586136" elapsed="0.000949"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-25T11:44:44.587712" level="INFO">{'nome': 'shoulder', 'preco': '2500', 'descricao': 'eletrônicos', 'quantidade': '201'}</msg>
+<arg>${body}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.587328" elapsed="0.000468"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-03-25T11:44:45.079657" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc0NDQ5ODk3LCJleHAiOjE3NzQ0NTA0OTd9.wVQhYVypexq4St5mHFSiXk4Qnd2DvAlUkAyCtpndjRA', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"nome": "shoulder", "preco": "2500", "descricao": "eletr\\u00f4nicos", "quantidade": "201"}' 
+ </msg>
+<msg time="2026-03-25T11:44:45.079834" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '1c21a8a2d558d3ab0d2f6bf1faf37f21', 'date': 'Wed, 25 Mar 2026 14:44:58 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "vHUZB5FHWK9CTff0"
+} 
+ </msg>
+<msg time="2026-03-25T11:44:45.080078" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>url=${URL}/produtos</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-03-25T11:44:44.587993" elapsed="0.492141"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-25T11:44:45.081781" level="INFO">${response_json} = {'message': 'Cadastro realizado com sucesso', '_id': 'vHUZB5FHWK9CTff0'}</msg>
+<var>${response_json}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-25T11:44:45.080503" elapsed="0.001339"/>
+</kw>
+<variable name="${ID_PRODUTO}" scope="TEST">
+<msg time="2026-03-25T11:44:45.083203" level="INFO">${ID_PRODUTO} = vHUZB5FHWK9CTff0</msg>
+<var>${response_json["_id"]}</var>
+<status status="PASS" start="2026-03-25T11:44:45.081969" elapsed="0.001284"/>
+</variable>
+<variable name="${QUANTIDADE_PRODUTO}" scope="TEST">
+<msg time="2026-03-25T11:44:45.083408" level="INFO">${QUANTIDADE_PRODUTO} = 201</msg>
+<var>${quantidade}</var>
+<status status="PASS" start="2026-03-25T11:44:45.083327" elapsed="0.000099"/>
+</variable>
+<arg>2500</arg>
+<arg>eletrônicos</arg>
+<arg>201</arg>
+<status status="PASS" start="2026-03-25T11:44:44.582814" elapsed="0.500666"/>
+</kw>
+<kw name="Buscar Produto Pelo ID" owner="ServeRest">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2026-03-25T11:44:45.545642" level="INFO">GET Request : url=https://compassuol.serverest.dev/produtos/vHUZB5FHWK9CTff0 
+ path_url=/produtos/vHUZB5FHWK9CTff0 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-03-25T11:44:45.545783" level="INFO">GET Response : url=https://compassuol.serverest.dev/produtos/vHUZB5FHWK9CTff0 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'a7898415ed5d7cff0d2f6bf1faf376d4', 'date': 'Wed, 25 Mar 2026 14:44:58 GMT', 'server': 'Google Frontend', 'Content-Length': '132'} 
+ body={
+    "nome": "shoulder",
+    "preco": 2500,
+    "descricao": "eletrônicos",
+    "quantidade": 201,
+    "_id": "vHUZB5FHWK9CTff0"
+} 
+ </msg>
+<msg time="2026-03-25T11:44:45.545959" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${URL}/produtos/${ID_PRODUTO}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2026-03-25T11:44:45.084343" elapsed="0.461651"/>
+</kw>
+<variable name="${RESPONSE_GET_PRODUTO}" scope="TEST">
+<msg time="2026-03-25T11:44:45.546255" level="INFO">${RESPONSE_GET_PRODUTO} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2026-03-25T11:44:45.546105" elapsed="0.000179"/>
+</variable>
+<status status="PASS" start="2026-03-25T11:44:45.084137" elapsed="0.462228"/>
+</kw>
+<kw name="Verificar o Status Code" owner="ServeRest">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-25T11:44:45.547322" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${RESPONSE_GET_PRODUTO.status_code}</arg>
+<arg>${status_esperado}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-25T11:44:45.546924" elapsed="0.000437"/>
+</kw>
+<arg>200</arg>
+<status status="PASS" start="2026-03-25T11:44:45.546682" elapsed="0.000719"/>
+</kw>
+<doc>Buscar um produto pelo ID após cadastro</doc>
+<tag>products</tag>
+<tag>valid</tag>
+<status status="PASS" start="2026-03-25T11:44:44.105928" elapsed="1.441785"/>
 </test>
 <doc>Essa suíte testa o endpoint /produtos da aplicação ServeRest</doc>
-<status status="PASS" start="2026-03-19T10:33:33.105363" elapsed="5.013699"/>
+<status status="PASS" start="2026-03-25T11:44:40.190540" elapsed="5.357894"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0" skip="0">All Tests</stat>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 <stat pass="3" fail="0" skip="0">invalid</stat>
-<stat pass="4" fail="0" skip="0">products</stat>
-<stat pass="1" fail="0" skip="0">valid</stat>
+<stat pass="5" fail="0" skip="0">products</stat>
+<stat pass="2" fail="0" skip="0">valid</stat>
 </tag>
 <suite>
-<stat name="Produtos" id="s1" pass="4" fail="0" skip="0">Produtos</stat>
+<stat name="Produtos" id="s1" pass="5" fail="0" skip="0">Produtos</stat>
 </suite>
 </statistics>
 <errors>

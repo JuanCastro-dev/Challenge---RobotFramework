@@ -103,6 +103,14 @@ Cadastrar Novo Produto Sem Permissão
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=401  headers=&{headers}
 
+Buscar Produto Pelo ID
+    ${response}    GET    url=${URL}/produtos/${ID_PRODUTO}
+    VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
+
+Verificar o Status Code
+    [Arguments]    ${status_esperado}
+    Should Be Equal As Integers    ${RESPONSE_GET_PRODUTO.status_code}    ${status_esperado}
+
 Verificar a quantidade de produtos no estoque
     [Arguments]    ${id}    ${id_2}
 

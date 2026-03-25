@@ -30,3 +30,13 @@ TP-04 - Cadastrar um produto sem permissão
     [Tags]    products    invalid
 
     Cadastrar Novo Produto Sem Permissão   2500   eletrônicos   300
+
+#Verificando a criação de testes com AmazonQ
+TP-05 - Buscar Produto Com ID Válido
+    [Documentation]    Buscar um produto pelo ID após cadastro
+    [Tags]    products    valid
+
+    Fazer login com o email "fulano@qa.com" e a senha "teste"
+    Cadastrar Novo Produto   2500   eletrônicos   201
+    Buscar Produto Pelo ID
+    Verificar o Status Code    200
