@@ -1,8 +1,5 @@
 *** Settings ***
-Library    SeleniumLibrary
-Library    RequestsLibrary
-Library    Collections
-Library    String
+Resource    base.robot
 
 *** Variables ***
 ${URL}           https://compassuol.serverest.dev
@@ -44,7 +41,7 @@ Cadastrar Novo Produto
     
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
 
-    ${palavra_aleatoria}  Generate Random String    length=10  chars=[LETTERS]
+    ${palavra_aleatoria}   FakerLibrary.Word
     
     ${body}    Create Dictionary    
     ...    nome=${palavra_aleatoria}
