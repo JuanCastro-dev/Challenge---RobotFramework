@@ -90,7 +90,7 @@ Cadastrar Novo Produto Com Nome Já Utilizado
 Cadastrar Novo Produto Sem Permissão
     [Arguments]    ${preco}    ${descricao}    ${quantidade}
 
-    &{headers}    Create Dictionary    Authorization=Bearer ${5235325436436}    Content-Type=application/json
+    &{headers}    Create Dictionary    Authorization=Bearer token_invalido    Content-Type=application/json
 
     ${palavra_aleatoria}  Generate Random String    length=10  chars=[LETTERS]
 
@@ -105,6 +105,10 @@ Cadastrar Novo Produto Sem Permissão
 
 Buscar Produto Pelo ID
     ${response}    GET    url=${URL}/produtos/${ID_PRODUTO}
+    VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
+
+Buscar Produto Pelo ID Inválido
+    ${response}    GET    url=${URL}/produtos/id_invalido    expected_status=any
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
 
 Verificar o Status Code
