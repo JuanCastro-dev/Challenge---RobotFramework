@@ -4,6 +4,7 @@ Resource    base.robot
 *** Variables ***
 ${URL}              https://compassuol.serverest.dev
 ${CANCELAR}         carrinhos/cancelar-compra
+${CONCLUIR}         carrinhos/concluir-compra
 ${EMAIL_ADMIN}      fulano@qa.com
 ${SENHA_ADMIN}      teste
 
@@ -200,6 +201,17 @@ Cancelar Uma Compra Sem Carrinho Vinculado
     &{headers}     Create Dictionary    Authorization=Bearer ${TOKEN}
 
     DELETE    url=${URL}/${CANCELAR}    headers=&{headers}    expected_status=400
+
+Concluir Uma Compra
+    &{headers}     Create Dictionary    Authorization=Bearer ${TOKEN}
+
+    DELETE    url=${URL}/${CONCLUIR}    headers=&{headers}    expected_status=200
+
+Verificar Se Os Produtos Não Retornaram Ao Estoque
+    [Arguments]    ${id}
+
+    ${produto_response}    GET    url=${URL}/produtos/${id}    expected_status=200
+    Should Not Be Equal    ${produto_response.json()["quantidade"]}    ${QUANTIDADE_PRODUTO}
 
 Fazer login com "fulano@qa.com" e garantir que não tenha carrinho já criado
     Fazer login com o email "${EMAIL_ADMIN}" e a senha "${SENHA_ADMIN}"
