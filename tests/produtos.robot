@@ -45,3 +45,19 @@ TP-06 - Buscar Produto Com ID Inválido
 
     Buscar Produto Pelo ID Inválido
     Verificar o Status Code    400
+
+TP-07 - Buscar Todos os Produtos
+    [Documentation]    Buscar a lista de produtos sem informar ID e verificar status 200
+    [Tags]    products    valid
+    [Setup]    No Operation
+
+    Buscar Produtos Sem ID
+    Verificar o Status Code    200
+
+TP-08 - Buscar Produto Com ID Inexistente
+    [Documentation]    Buscar um produto com ID válido no formato mas inexistente na base e verificar status 400
+    [Tags]    products    invalid
+    [Setup]    No Operation
+
+    Buscar Produto Por ID Inexistente
+    Verificar o Status Code    400

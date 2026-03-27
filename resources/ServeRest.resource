@@ -101,6 +101,14 @@ Buscar Produto Pelo ID Inválido
     ${response}    GET    url=${URL}/produtos/id_invalido    expected_status=any
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
 
+Buscar Produtos Sem ID
+    ${response}    GET    url=${URL}/produtos    expected_status=200
+    VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
+
+Buscar Produto Por ID Inexistente
+    ${response}    GET    url=${URL}/produtos/000000000000000000000000    expected_status=400
+    VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
+
 Verificar o Status Code
     [Arguments]    ${status_esperado}
     Should Be Equal As Integers    ${RESPONSE_GET_PRODUTO.status_code}    ${status_esperado}
