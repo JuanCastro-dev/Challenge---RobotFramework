@@ -64,3 +64,13 @@ TC-07 - Cancelar uma compra sem um carrinho existente
     [Tags]    cart    invalid    delete
 
     Cancelar Uma Compra Sem Carrinho Vinculado
+
+TC-08 - Concluir uma compra com sucesso
+    [Documentation]    Concluir uma compra, excluindo o carrinho sem retornar os produtos ao estoque
+    [Tags]    cart    valid    delete
+
+    Cadastrar Novo Produto                                   500    eletrodomesticos    105
+    Cadastrar Novo Carrinho                                  BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
+    Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
+    Concluir Uma Compra
+    Verificar Se Os Produtos Não Retornaram Ao Estoque       ${ID_PRODUTO}
