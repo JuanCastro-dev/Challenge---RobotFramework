@@ -10,6 +10,7 @@ TP-01 - Cadastrar um produto com dados válidos
     [Tags]    products    valid
 
     Cadastrar Novo Produto    2500    eletrônicos    201
+    Verificar JSON Da Response Do Produto
 
 TP-02 - Cadastrar um produto com dados inválidos
     [Documentation]    Cadastrar um produto com dados inválidos e com admin autenticado
@@ -68,6 +69,7 @@ TP-09 - Alterar Produto Válido
 
     Cadastrar Novo Produto    2500    eletrônicos    201
     Alterar Produto    1800    eletrônicos    150    200
+    Verificar JSON Da Response Do Produto
 
 TP-10 - Alterar Um Produto Para Um Nome Já Utilizado
     [Documentation]    Alterar um produto usando um nome já cadastrado e verificar status 400

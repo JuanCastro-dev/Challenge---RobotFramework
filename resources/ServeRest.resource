@@ -54,8 +54,12 @@ Cadastrar Novo Produto
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=201    headers=&{headers}
 
-    VAR    ${ID_PRODUTO}         ${response.json()["_id"]}    scope=TEST
-    VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}             scope=TEST
+    VAR    ${ID_PRODUTO}           ${response.json()["_id"]}    scope=TEST
+    VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}               scope=TEST
+    VAR    ${RESPONSE_PRODUTO}      ${response}                 scope=TEST
+    VAR    ${NOME_PRODUTO}          ${nome}                     scope=TEST
+    VAR    ${PRECO_PRODUTO}         ${preco}                    scope=TEST
+    VAR    ${DESCRICAO_PRODUTO}     ${descricao}                scope=TEST
 
 Cadastrar Novo Produto Inválido
     [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
@@ -71,6 +75,7 @@ Cadastrar Novo Produto Inválido
     ...    quantidade=${quantidade}
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    VAR    ${RESPONSE_PRODUTO}    ${response}    scope=TEST
 
 Cadastrar Novo Produto Com Nome Já Utilizado
     [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}
@@ -129,7 +134,12 @@ Alterar Produto
     ...    descricao=${descricao}
     ...    quantidade=${quantidade}
 
-    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    ${response}    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    VAR    ${RESPONSE_PRODUTO}      ${response}     scope=TEST
+    VAR    ${NOME_PRODUTO}          ${nome}         scope=TEST
+    VAR    ${PRECO_PRODUTO}         ${preco}        scope=TEST
+    VAR    ${DESCRICAO_PRODUTO}     ${descricao}    scope=TEST
+    VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}   scope=TEST
 
 Alterar Produto Para Nome Já Utilizado
     [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
@@ -158,6 +168,13 @@ Alterar Produto Invalido
     ...    quantidade=${quantidade}
 
     PUT    url=${URL}/produtos/id_invalido    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+
+Verificar JSON Da Response Do Produto
+    ${produto}    GET    url=${URL}/produtos/${ID_PRODUTO}    expected_status=200
+    Should Be Equal As Strings     ${produto.json()["nome"]}        ${NOME_PRODUTO}
+    Should Be Equal As Integers    ${produto.json()["preco"]}       ${PRECO_PRODUTO}
+    Should Be Equal As Strings     ${produto.json()["descricao"]}   ${DESCRICAO_PRODUTO}
+    Should Be Equal As Integers    ${produto.json()["quantidade"]}  ${QUANTIDADE_PRODUTO}
 
 Verificar o Status Code
     [Arguments]    ${status_esperado}
