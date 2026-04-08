@@ -32,6 +32,12 @@ Fazer login inválido com o email "${EMAIL}" e a senha "${PASSWORD}"
 
     ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=${status_esperado}
 
+Fazer login com payload incompleto com o email "${EMAIL}"
+    ${body}    Create Dictionary
+    ...    email=${EMAIL}
+
+    ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=400
+
 #------------------------------------------- KeyWords para Produtos -------------------------------------------
 Cadastrar Novo Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}
@@ -109,6 +115,49 @@ Buscar Produtos Sem ID
 Buscar Produto Por ID Inexistente
     ${response}    GET    url=${URL}/produtos/000000000000000000000000    expected_status=400
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
+
+Alterar Produto
+    [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${nome}    FakerLibrary.Word
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+
+    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+
+Alterar Produto Para Nome Já Utilizado
+    [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+
+    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+
+Alterar Produto Invalido
+    [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${nome}    Generate Random String    length=10    chars=[LETTERS]
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+
+    PUT    url=${URL}/produtos/id_invalido    json=${body}    expected_status=${status_esperado}    headers=&{headers}
 
 Verificar o Status Code
     [Arguments]    ${status_esperado}

@@ -22,3 +22,8 @@ Tl-04 - Login com senha incorreta
     [Documentation]    Realizar login com dados inválidos
     [Tags]    login    invalid
     Fazer login inválido com o email "fulano@qa.com" e a senha "123456"    401
+
+TL-05 - Login Com Payload Incompleto
+    [Documentation]    Realizar login sem informar a senha no payload
+    [Tags]    login    invalid    genAI
+    Fazer login com payload incompleto com o email "fulano@qa.com"
