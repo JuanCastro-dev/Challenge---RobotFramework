@@ -10,6 +10,7 @@ TP-01 - Cadastrar um produto com dados válidos
     [Tags]    products    valid
 
     Cadastrar Novo Produto    2500    eletrônicos    201
+    Verificar JSON Da Response Do Produto
 
 TP-02 - Cadastrar um produto com dados inválidos
     [Documentation]    Cadastrar um produto com dados inválidos e com admin autenticado
@@ -61,3 +62,24 @@ TP-08 - Buscar Produto Com ID Inexistente
 
     Buscar Produto Por ID Inexistente
     Verificar o Status Code    400
+
+TP-09 - Alterar Produto Válido
+    [Documentation]    Alterar um produto existente com dados válidos e admin autenticado
+    [Tags]    products    valid    genAI
+
+    Cadastrar Novo Produto    2500    eletrônicos    201
+    Alterar Produto    1800    eletrônicos    150    200
+    Verificar JSON Da Response Do Produto
+
+TP-10 - Alterar Um Produto Para Um Nome Já Utilizado
+    [Documentation]    Alterar um produto usando um nome já cadastrado e verificar status 400
+    [Tags]    products    invalid    genAI
+
+    Cadastrar Novo Produto    2500    eletrônicos    201
+    Alterar Produto Para Nome Já Utilizado    Logitech MX Vertical    1800    eletrônicos    150    400
+
+TP-11 - Alterar Produto Com ID Invalido
+    [Documentation]    Alterar um produto com ID inválido e verificar status 400
+    [Tags]    products    invalid    genAI
+
+    Alterar Produto Invalido    1800    eletrônicos    150    400

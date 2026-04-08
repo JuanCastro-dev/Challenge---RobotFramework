@@ -32,6 +32,12 @@ Fazer login inválido com o email "${EMAIL}" e a senha "${PASSWORD}"
 
     ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=${status_esperado}
 
+Fazer login com payload incompleto com o email "${EMAIL}"
+    ${body}    Create Dictionary
+    ...    email=${EMAIL}
+
+    ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=400
+
 #------------------------------------------- KeyWords para Produtos -------------------------------------------
 Cadastrar Novo Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}
@@ -48,8 +54,12 @@ Cadastrar Novo Produto
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=201    headers=&{headers}
 
-    VAR    ${ID_PRODUTO}         ${response.json()["_id"]}    scope=TEST
-    VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}             scope=TEST
+    VAR    ${ID_PRODUTO}           ${response.json()["_id"]}    scope=TEST
+    VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}               scope=TEST
+    VAR    ${RESPONSE_PRODUTO}      ${response}                 scope=TEST
+    VAR    ${NOME_PRODUTO}          ${nome}                     scope=TEST
+    VAR    ${PRECO_PRODUTO}         ${preco}                    scope=TEST
+    VAR    ${DESCRICAO_PRODUTO}     ${descricao}                scope=TEST
 
 Cadastrar Novo Produto Inválido
     [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
@@ -65,6 +75,7 @@ Cadastrar Novo Produto Inválido
     ...    quantidade=${quantidade}
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    VAR    ${RESPONSE_PRODUTO}    ${response}    scope=TEST
 
 Cadastrar Novo Produto Com Nome Já Utilizado
     [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}
@@ -109,6 +120,61 @@ Buscar Produtos Sem ID
 Buscar Produto Por ID Inexistente
     ${response}    GET    url=${URL}/produtos/000000000000000000000000    expected_status=400
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
+
+Alterar Produto
+    [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${nome}    FakerLibrary.Word
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+
+    ${response}    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    VAR    ${RESPONSE_PRODUTO}      ${response}     scope=TEST
+    VAR    ${NOME_PRODUTO}          ${nome}         scope=TEST
+    VAR    ${PRECO_PRODUTO}         ${preco}        scope=TEST
+    VAR    ${DESCRICAO_PRODUTO}     ${descricao}    scope=TEST
+    VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}   scope=TEST
+
+Alterar Produto Para Nome Já Utilizado
+    [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+
+    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+
+Alterar Produto Invalido
+    [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
+
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+
+    ${nome}    Generate Random String    length=10    chars=[LETTERS]
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+
+    PUT    url=${URL}/produtos/id_invalido    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+
+Verificar JSON Da Response Do Produto
+    ${produto}    GET    url=${URL}/produtos/${ID_PRODUTO}    expected_status=200
+    Should Be Equal As Strings     ${produto.json()["nome"]}        ${NOME_PRODUTO}
+    Should Be Equal As Integers    ${produto.json()["preco"]}       ${PRECO_PRODUTO}
+    Should Be Equal As Strings     ${produto.json()["descricao"]}   ${DESCRICAO_PRODUTO}
+    Should Be Equal As Integers    ${produto.json()["quantidade"]}  ${QUANTIDADE_PRODUTO}
 
 Verificar o Status Code
     [Arguments]    ${status_esperado}
