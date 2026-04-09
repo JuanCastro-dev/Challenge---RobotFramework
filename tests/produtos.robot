@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    Essa suíte testa o endpoint /produtos da aplicação ServeRest
 Resource         ../resources/ServeRest.resource
-Test Setup       Fazer login com o email "${EMAIL_ADMIN}" e a senha "${SENHA_ADMIN}"
+Test Setup       Fazer login como admin
 
 *** Test Cases ***
 
@@ -83,3 +83,19 @@ TP-11 - Alterar Produto Com ID Invalido
     [Tags]    products    invalid    genAI
 
     Alterar Produto Invalido    1800    eletrônicos    150    400
+
+TP-12 - Excluir Um Produto Válido
+    [Documentation]    Excluir um produto existente com admin autenticado e verificar status 200
+    [Tags]    products    valid    genAI
+
+    Cadastrar Novo Produto    2500    eletrônicos    201
+    Excluir Produto    200
+
+TP-13 - Excluir Um Produto Vinculado A Um Carrinho
+    [Documentation]    Excluir um produto que está vinculado a um carrinho e verificar status 400
+    [Tags]    products    invalid    genAI
+    [Setup]    Fazer login como admin e garantir que não tenha carrinho já criado
+
+    Cadastrar Novo Produto    500    eletrônicos    100
+    Cadastrar Novo Carrinho    BeeJh5lz3k6kSIzA    2    ${ID_PRODUTO}    3
+    Excluir Produto    400

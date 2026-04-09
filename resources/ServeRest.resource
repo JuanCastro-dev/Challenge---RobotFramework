@@ -39,6 +39,7 @@ Fazer login com payload incompleto com o email "${EMAIL}"
     ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=400
 
 #------------------------------------------- KeyWords para Produtos -------------------------------------------
+#---POST---
 Cadastrar Novo Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}
 
@@ -105,6 +106,7 @@ Cadastrar Novo Produto Sem Permissão
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=401    headers=&{headers}
 
+#---GET---
 Buscar Produto Pelo ID
     ${response}    GET    url=${URL}/produtos/${ID_PRODUTO}
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
@@ -121,6 +123,7 @@ Buscar Produto Por ID Inexistente
     ${response}    GET    url=${URL}/produtos/000000000000000000000000    expected_status=400
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
 
+#---PUT---
 Alterar Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
 
@@ -169,6 +172,13 @@ Alterar Produto Invalido
 
     PUT    url=${URL}/produtos/id_invalido    json=${body}    expected_status=${status_esperado}    headers=&{headers}
 
+#---DELETE---
+Excluir Produto
+    [Arguments]    ${status_esperado}
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}
+    DELETE    url=${URL}/produtos/${ID_PRODUTO}    headers=&{headers}    expected_status=${status_esperado}
+
+#---VERIFICAÇÃO---
 Verificar JSON Da Response Do Produto
     ${produto}    GET    url=${URL}/produtos/${ID_PRODUTO}    expected_status=200
     Should Be Equal As Strings     ${produto.json()["nome"]}        ${NOME_PRODUTO}
@@ -213,7 +223,8 @@ Cadastrar Novo Carrinho
 
     ${response}    POST    url=${URL}/carrinhos    json=&{body}    expected_status=201    headers=&{headers}
 
-    VAR    ${QUANTIDADE_PRODUTO2_CARRINHO}    ${quantidade2}    scope=TEST
+    VAR    ${ID_CARRINHO}                  ${response.json()["_id"]}    scope=TEST
+    VAR    ${QUANTIDADE_PRODUTO2_CARRINHO}    ${quantidade2}              scope=TEST
 
 Cadastrar Novo Carrinho Sem Token Válido
     [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
@@ -251,6 +262,16 @@ Cadastrar Carrinho Novamente
 
     ${response}    POST    url=${URL}/carrinhos    json=&{body}    expected_status=400    headers=&{headers}
 
+#------------------------------------------- KeyWords para GET em Carrinhos -------------------------------------------
+
+Listar Todos Os Carrinhos
+    ${response}    GET    url=${URL}/carrinhos    expected_status=200
+    VAR    ${RESPONSE_GET_CARRINHO}    ${response}    scope=TEST
+
+Buscar Carrinho Pelo ID
+    ${response}    GET    url=${URL}/carrinhos/${ID_CARRINHO}    expected_status=200
+    VAR    ${RESPONSE_GET_CARRINHO}    ${response}    scope=TEST
+
 #------------------------------------------- KeyWords para DELETE em Carrinhos -------------------------------------------
 
 Cancelar uma compra
@@ -273,12 +294,37 @@ Concluir Uma Compra
 
     DELETE    url=${URL}/${CONCLUIR}    headers=&{headers}    expected_status=200
 
+Concluir Uma Compra Sem Carrinho Vinculado
+    &{headers}     Create Dictionary    Authorization=Bearer ${TOKEN}
+
+    DELETE    url=${URL}/${CONCLUIR}    headers=&{headers}    expected_status=400
+
 Verificar Se Os Produtos Não Retornaram Ao Estoque
     [Arguments]    ${id}
 
     ${produto_response}    GET    url=${URL}/produtos/${id}    expected_status=200
     Should Not Be Equal    ${produto_response.json()["quantidade"]}    ${QUANTIDADE_PRODUTO}
 
-Fazer login com "fulano@qa.com" e garantir que não tenha carrinho já criado
-    Fazer login com o email "${EMAIL_ADMIN}" e a senha "${SENHA_ADMIN}"
+#------------------------------------------- KeyWords para Usuários -------------------------------------------
+
+Criar novo usuário como admin
+    [Arguments]    ${nome}    ${email}    ${password}    ${administrador}
+
+    ${body}    Create Dictionary
+    ...    nome=${nome}
+    ...    email=${email}
+    ...    password=${password}
+    ...    administrador=${administrador}
+
+    POST    url=${URL}/usuarios    json=${body}    expected_status=201
+
+Fazer login como admin e garantir que não tenha carrinho já criado
+    ${EMAIL_GERADO}    FakerLibrary.Email
+    Criar novo usuário como admin    Tester    ${EMAIL_GERADO}    123456    true
+    Fazer login com o email "${EMAIL_GERADO}" e a senha "123456"
     Cancelar uma compra
+
+Fazer login como admin
+    ${EMAIL_GERADO}    FakerLibrary.Email
+    Criar novo usuário como admin    Tester    ${EMAIL_GERADO}    123456    true
+    Fazer login com o email "${EMAIL_GERADO}" e a senha "123456"
