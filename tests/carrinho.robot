@@ -38,8 +38,22 @@ TC-04 - Cadastrar um carrinho com um token já vinculado
     Verificar a quantidade de produtos no estoque    BeeJh5lz3k6kSIzA    ${ID_PRODUTO}
     Cadastrar Novo Carrinho    BeeJh5lz3k6kSIzA    2    ${ID_PRODUTO}    3
     Cadastrar Carrinho Novamente    BeeJh5lz3k6kSIzA    8    ${ID_PRODUTO}    4
+
+TC-05 - Cadastrar Carrinho Com O Mesmo Produto Duplicado No Array De Itens
+    [Documentation]    Cadastrar um carrinho com o mesmo produto duplicado no array de itens e verificar status 400
+    [Tags]    cart    invalid    post    genAI
+
+    Cadastrar Novo Produto    500    eletrônicos    100
+    Cadastrar Novo Carrinho Inválido    ${ID_PRODUTO}    2    ${ID_PRODUTO}    6
+
+TC-06 - Cadastrar Carrinho Com Produto De Quantidade Negativa
+    [Documentation]    Cadastrar um carrinho com um produto de quantidade negativa e verificar status 400
+    [Tags]    cart    invalid    post    genAI
+
+    Cadastrar Novo Produto    500    eletrônicos    100
+    Cadastrar Novo Carrinho Inválido    BeeJh5lz3k6kSIzA    -2    ${ID_PRODUTO}    6
         
-TC-05 - Cancelar uma compra com sucesso
+TC-07 - Cancelar uma compra com sucesso
     [Documentation]    Cancelar uma compra, excluindo o carrinho e retornando os produtos ao estoque
     [Tags]    cart    valid    delete
 
@@ -50,7 +64,7 @@ TC-05 - Cancelar uma compra com sucesso
     #Bug encontrado, a quantidade de produtos não corresponde
     Verificar se os produtos retornaram ao estoque    ${ID_PRODUTO}
 
-TC-06 - Cancelar uma compra sem um token válido
+TC-08 - Cancelar uma compra sem um token válido
     [Documentation]    Cancelar uma compra, excluindo o carrinho utilizando um token inválido
     [Tags]    cart    invalid    delete
 
@@ -59,13 +73,13 @@ TC-06 - Cancelar uma compra sem um token válido
     Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
     Cancelar Uma Compra Token Inválido
 
-TC-07 - Cancelar uma compra sem um carrinho existente
+TC-09 - Cancelar uma compra sem um carrinho existente
     [Documentation]    Cancelar uma compra com um token sem carrinho vinculado
     [Tags]    cart    invalid    delete
 
     Cancelar Uma Compra Sem Carrinho Vinculado
 
-TC-08 - Concluir uma compra com sucesso
+TC-10 - Concluir uma compra com sucesso
     [Documentation]    Concluir uma compra, excluindo o carrinho sem retornar os produtos ao estoque
     [Tags]    cart    valid    delete
 

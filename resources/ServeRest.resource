@@ -39,6 +39,7 @@ Fazer login com payload incompleto com o email "${EMAIL}"
     ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=400
 
 #------------------------------------------- KeyWords para Produtos -------------------------------------------
+#---POST---
 Cadastrar Novo Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}
 
@@ -105,6 +106,7 @@ Cadastrar Novo Produto Sem Permissão
 
     ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=401    headers=&{headers}
 
+#---GET---
 Buscar Produto Pelo ID
     ${response}    GET    url=${URL}/produtos/${ID_PRODUTO}
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
@@ -121,6 +123,7 @@ Buscar Produto Por ID Inexistente
     ${response}    GET    url=${URL}/produtos/000000000000000000000000    expected_status=400
     VAR    ${RESPONSE_GET_PRODUTO}    ${response}    scope=TEST
 
+#---PUT---
 Alterar Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
 
@@ -169,6 +172,13 @@ Alterar Produto Invalido
 
     PUT    url=${URL}/produtos/id_invalido    json=${body}    expected_status=${status_esperado}    headers=&{headers}
 
+#---DELETE---
+Excluir Produto
+    [Arguments]    ${status_esperado}
+    &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}
+    DELETE    url=${URL}/produtos/${ID_PRODUTO}    headers=&{headers}    expected_status=${status_esperado}
+
+#---VERIFICAÇÃO---
 Verificar JSON Da Response Do Produto
     ${produto}    GET    url=${URL}/produtos/${ID_PRODUTO}    expected_status=200
     Should Be Equal As Strings     ${produto.json()["nome"]}        ${NOME_PRODUTO}
