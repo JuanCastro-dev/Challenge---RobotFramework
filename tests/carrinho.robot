@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    Essa suíte testa o endpoint /carrinhos da aplicação ServeRest
 Resource    ../resources/ServeRest.resource
-Test Setup    Fazer login com "fulano@qa.com" e garantir que não tenha carrinho já criado
+Test Setup    Fazer login como admin e garantir que não tenha carrinho já criado
 
 *** Test Cases ***
 
@@ -53,7 +53,13 @@ TC-06 - Cadastrar Carrinho Com Produto De Quantidade Negativa
     Cadastrar Novo Produto    500    eletrônicos    100
     Cadastrar Novo Carrinho Inválido    BeeJh5lz3k6kSIzA    -2    ${ID_PRODUTO}    6
         
-TC-07 - Cancelar uma compra com sucesso
+TC-07 - Cadastrar Novo Carrinho Com Um Produto Inexistente
+    [Documentation]    Cadastrar um carrinho com um produto de ID inexistente e verificar status 400
+    [Tags]    cart    invalid    post    genAI
+
+    Cadastrar Novo Carrinho Inválido    id_produto_inexistente    2    BeeJh5lz3k6kSIzA    3
+
+TC-08 - Cancelar uma compra com sucesso
     [Documentation]    Cancelar uma compra, excluindo o carrinho e retornando os produtos ao estoque
     [Tags]    cart    valid    delete
 
@@ -61,10 +67,9 @@ TC-07 - Cancelar uma compra com sucesso
     Cadastrar Novo Carrinho                          BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
     Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
     Cancelar uma compra
-    #Bug encontrado, a quantidade de produtos não corresponde
     Verificar se os produtos retornaram ao estoque    ${ID_PRODUTO}
 
-TC-08 - Cancelar uma compra sem um token válido
+TC-09 - Cancelar uma compra sem um token válido
     [Documentation]    Cancelar uma compra, excluindo o carrinho utilizando um token inválido
     [Tags]    cart    invalid    delete
 
@@ -73,13 +78,13 @@ TC-08 - Cancelar uma compra sem um token válido
     Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
     Cancelar Uma Compra Token Inválido
 
-TC-09 - Cancelar uma compra sem um carrinho existente
+TC-10 - Cancelar uma compra sem um carrinho existente
     [Documentation]    Cancelar uma compra com um token sem carrinho vinculado
     [Tags]    cart    invalid    delete
 
     Cancelar Uma Compra Sem Carrinho Vinculado
 
-TC-10 - Concluir uma compra com sucesso
+TC-11 - Concluir uma compra com sucesso
     [Documentation]    Concluir uma compra, excluindo o carrinho sem retornar os produtos ao estoque
     [Tags]    cart    valid    delete
 
@@ -88,3 +93,24 @@ TC-10 - Concluir uma compra com sucesso
     Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
     Concluir Uma Compra
     Verificar Se Os Produtos Não Retornaram Ao Estoque       ${ID_PRODUTO}
+
+TC-12 - Concluir Uma Compra Sem Carrinho Existente
+    [Documentation]    Concluir uma compra com um token sem carrinho vinculado e verificar status 400
+    [Tags]    cart    invalid    delete    genAI
+
+    Concluir Uma Compra Sem Carrinho Vinculado
+
+TC-13 - Listar Todos Os Carrinhos
+    [Documentation]    Listar todos os carrinhos cadastrados e verificar status 200
+    [Tags]    cart    valid    get    genAI
+    [Setup]    No Operation
+
+    Listar Todos Os Carrinhos
+
+TC-14 - Buscar Carrinho Pelo Id
+    [Documentation]    Buscar um carrinho pelo ID após cadastro e verificar status 200
+    [Tags]    cart    valid    get    genAI
+
+    Cadastrar Novo Produto    500    eletrodomesticos    100
+    Cadastrar Novo Carrinho    BeeJh5lz3k6kSIzA    2    ${ID_PRODUTO}    3
+    Buscar Carrinho Pelo ID

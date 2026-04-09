@@ -1,77 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-04-09T10:32:59.380665" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-04-09T12:34:23.322868" rpa="false" schemaversion="5">
 <suite id="s1" name="Carrinho" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\tests\carrinho.robot">
 <test id="s1-t1" name="TC-05 - Cadastrar Carrinho Com O Mesmo Produto Duplicado No Array De Itens" line="42">
-<kw name="Fazer login com &quot;fulano@qa.com&quot; e garantir que não tenha carrinho já criado" owner="ServeRest" type="SETUP">
-<kw name="Fazer login com o email &quot;${EMAIL_ADMIN}&quot; e a senha &quot;${SENHA_ADMIN}&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Fazer login como admin e garantir que não tenha carrinho já criado" owner="ServeRest" type="SETUP">
+<kw name="Email" owner="FakerLibrary">
+<msg time="2026-04-09T12:34:23.652168" level="INFO">${EMAIL_GERADO} = helenbarnes@example.net</msg>
+<var>${EMAIL_GERADO}</var>
+<status status="PASS" start="2026-04-09T12:34:23.651804" elapsed="0.000392"/>
+</kw>
+<kw name="Criar novo usuário como admin" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:32:59.721332" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-04-09T12:34:23.653306" level="INFO">${body} = {'nome': 'Tester', 'email': 'helenbarnes@example.net', 'password': '123456', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:23.652915" elapsed="0.000421"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:24.116070" level="INFO">POST Request : url=https://compassuol.serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '101', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Tester", "email": "helenbarnes@example.net", "password": "123456", "administrador": "true"}' 
+ </msg>
+<msg time="2026-04-09T12:34:24.116166" level="INFO">POST Response : url=https://compassuol.serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'c88137e34ea452714a32b0322143aa5e;o=1', 'date': 'Thu, 09 Apr 2026 15:34:42 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "jc1W4SSyZdCYcVwl"
+} 
+ </msg>
+<arg>url=${URL}/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:23.653422" elapsed="0.462801"/>
+</kw>
+<arg>Tester</arg>
+<arg>${EMAIL_GERADO}</arg>
+<arg>123456</arg>
+<arg>true</arg>
+<status status="PASS" start="2026-04-09T12:34:23.652327" elapsed="0.463980"/>
+</kw>
+<kw name="Fazer login com o email &quot;${EMAIL_GERADO}&quot; e a senha &quot;123456&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:24.117137" level="INFO">${body} = {'email': 'helenbarnes@example.net', 'password': '123456'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:32:59.720948" elapsed="0.000412"/>
+<status status="PASS" start="2026-04-09T12:34:24.116862" elapsed="0.000297"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:00.186844" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-09T12:34:24.533934" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
- body=b'{"email": "fulano@qa.com", "password": "teste"}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '58', 'Content-Type': 'application/json'} 
+ body=b'{"email": "helenbarnes@example.net", "password": "123456"}' 
  </msg>
-<msg time="2026-04-09T10:33:00.187017" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-09T12:34:24.534229" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '1e2620d04ef0c5c02a3e8ecbe482a474;o=1', 'date': 'Thu, 09 Apr 2026 13:33:18 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '2083d8a6a724ef924a32b0322143aa84', 'date': 'Thu, 09 Apr 2026 15:34:43 GMT', 'server': 'Google Frontend', 'Content-Length': '280'} 
  body={
     "message": "Login realizado com sucesso",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AESPUOTXiEA"
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr5pMCcktMkPO4eoLrrBGBeJA"
 } 
  </msg>
-<msg time="2026-04-09T10:33:00.187200" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-09T12:34:24.536069" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-04-09T10:32:59.721467" elapsed="0.465761"/>
+<status status="PASS" start="2026-04-09T12:34:24.117245" elapsed="0.418874"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-04-09T10:33:00.188045" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU...</msg>
+<msg time="2026-04-09T12:34:24.536930" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODM...</msg>
 <var>${login_response_json}</var>
 <arg>${login_response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.187460" elapsed="0.000609"/>
+<status status="PASS" start="2026-04-09T12:34:24.536344" elapsed="0.000607"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-09T10:33:00.188766" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AESPUOTXiEA</msg>
+<msg time="2026-04-09T12:34:24.538209" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr5pMCcktMkPO4eoLr...</msg>
 <arg>${TOKEN}</arg>
 <arg>${login_response_json["authorization"]}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.188180" elapsed="0.000614"/>
+<status status="PASS" start="2026-04-09T12:34:24.537471" elapsed="0.000774"/>
 </kw>
 <variable name="${TOKEN}" scope="TEST">
-<msg time="2026-04-09T10:33:00.189055" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AESPUOTXiEA</msg>
+<msg time="2026-04-09T12:34:24.538527" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr5pMCcktMkPO4eoLrrBGBeJA</msg>
 <var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
-<status status="PASS" start="2026-04-09T10:33:00.188834" elapsed="0.000238"/>
+<status status="PASS" start="2026-04-09T12:34:24.538291" elapsed="0.000254"/>
 </variable>
-<status status="PASS" start="2026-04-09T10:32:59.720246" elapsed="0.468889"/>
+<status status="PASS" start="2026-04-09T12:34:24.116600" elapsed="0.422007"/>
 </kw>
 <kw name="Cancelar uma compra" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:00.189612" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AES...</msg>
+<msg time="2026-04-09T12:34:24.539136" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.189406" elapsed="0.000223"/>
+<status status="PASS" start="2026-04-09T12:34:24.538876" elapsed="0.000279"/>
 </kw>
 <kw name="DELETE" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:00.603303" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+<msg time="2026-04-09T12:34:24.950375" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
  path_url=/carrinhos/cancelar-compra 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AESPUOTXiEA', 'Content-Length': '0'} 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr5pMCcktMkPO4eoLrrBGBeJA', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-09T10:33:00.603386" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+<msg time="2026-04-09T12:34:24.950565" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '878a3144f974e971af3bbf0453132d6c', 'date': 'Thu, 09 Apr 2026 13:33:19 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '3252341c1467f1794a32b0322143af25', 'date': 'Thu, 09 Apr 2026 15:34:43 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
  body={
     "message": "Não foi encontrado carrinho para esse usuário"
 } 
@@ -79,244 +121,286 @@
 <arg>url=${URL}/${CANCELAR}</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a DELETE request.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.189693" elapsed="0.413753"/>
+<status status="PASS" start="2026-04-09T12:34:24.539237" elapsed="0.411427"/>
 </kw>
-<status status="PASS" start="2026-04-09T10:33:00.189244" elapsed="0.414289"/>
+<status status="PASS" start="2026-04-09T12:34:24.538714" elapsed="0.412070"/>
 </kw>
-<status status="PASS" start="2026-04-09T10:32:59.719834" elapsed="0.883738"/>
+<status status="PASS" start="2026-04-09T12:34:23.651346" elapsed="1.299502"/>
 </kw>
 <kw name="Cadastrar Novo Produto" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:00.605126" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AES...</msg>
+<msg time="2026-04-09T12:34:24.952633" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.604690" elapsed="0.000472"/>
+<status status="PASS" start="2026-04-09T12:34:24.952212" elapsed="0.000446"/>
 </kw>
 <kw name="Word" owner="FakerLibrary">
-<msg time="2026-04-09T10:33:00.605471" level="INFO">${nome} = likely</msg>
+<msg time="2026-04-09T12:34:24.952892" level="INFO">${nome} = design</msg>
 <var>${nome}</var>
 <doc>Generate a word.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.605292" elapsed="0.000199"/>
+<status status="PASS" start="2026-04-09T12:34:24.952752" elapsed="0.000156"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:00.605892" level="INFO">${body} = {'nome': 'likely', 'preco': '500', 'descricao': 'eletrônicos', 'quantidade': '100'}</msg>
+<msg time="2026-04-09T12:34:24.953213" level="INFO">${body} = {'nome': 'design', 'preco': '500', 'descricao': 'eletrônicos', 'quantidade': '100'}</msg>
 <var>${body}</var>
 <arg>nome=${nome}</arg>
 <arg>preco=${preco}</arg>
 <arg>descricao=${descricao}</arg>
 <arg>quantidade=${quantidade}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.605596" elapsed="0.000313"/>
+<status status="PASS" start="2026-04-09T12:34:24.952982" elapsed="0.000249"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:01.015254" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-04-09T12:34:25.370299" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
  path_url=/produtos 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AESPUOTXiEA', 'Content-Type': 'application/json', 'Content-Length': '88'} 
- body=b'{"nome": "likely", "preco": "500", "descricao": "eletr\\u00f4nicos", "quantidade": "100"}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr5pMCcktMkPO4eoLrrBGBeJA', 'Content-Type': 'application/json', 'Content-Length': '88'} 
+ body=b'{"nome": "design", "preco": "500", "descricao": "eletr\\u00f4nicos", "quantidade": "100"}' 
  </msg>
-<msg time="2026-04-09T10:33:01.015412" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-04-09T12:34:25.370432" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
  status=201, reason=Created 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f2685d056e8a9e6faf3bbf0453132a01', 'date': 'Thu, 09 Apr 2026 13:33:19 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '96bff3f3a4b7ace14a32b0322143a9ca', 'date': 'Thu, 09 Apr 2026 15:34:43 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
  body={
     "message": "Cadastro realizado com sucesso",
-    "_id": "FVADmfpOmkMsfbWd"
+    "_id": "Yvo6kcb4TaT4O65m"
 } 
  </msg>
-<msg time="2026-04-09T10:33:01.016817" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2026-04-09T12:34:25.371750" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/produtos</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=201</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-04-09T10:33:00.606009" elapsed="0.410856"/>
+<status status="PASS" start="2026-04-09T12:34:24.953305" elapsed="0.418480"/>
 </kw>
 <variable name="${ID_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:01.017402" level="INFO">${ID_PRODUTO} = FVADmfpOmkMsfbWd</msg>
+<msg time="2026-04-09T12:34:25.372316" level="INFO">${ID_PRODUTO} = Yvo6kcb4TaT4O65m</msg>
 <var>${response.json()["_id"]}</var>
-<status status="PASS" start="2026-04-09T10:33:01.016963" elapsed="0.000467"/>
+<status status="PASS" start="2026-04-09T12:34:25.371888" elapsed="0.000447"/>
 </variable>
 <variable name="${QUANTIDADE_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:01.017645" level="INFO">${QUANTIDADE_PRODUTO} = 100</msg>
+<msg time="2026-04-09T12:34:25.372448" level="INFO">${QUANTIDADE_PRODUTO} = 100</msg>
 <var>${quantidade}</var>
-<status status="PASS" start="2026-04-09T10:33:01.017511" elapsed="0.000167"/>
+<status status="PASS" start="2026-04-09T12:34:25.372380" elapsed="0.000084"/>
 </variable>
 <variable name="${RESPONSE_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:01.017878" level="INFO">${RESPONSE_PRODUTO} = &lt;Response [201]&gt;</msg>
+<msg time="2026-04-09T12:34:25.372555" level="INFO">${RESPONSE_PRODUTO} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
-<status status="PASS" start="2026-04-09T10:33:01.017740" elapsed="0.000165"/>
+<status status="PASS" start="2026-04-09T12:34:25.372496" elapsed="0.000074"/>
 </variable>
 <variable name="${NOME_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:01.018035" level="INFO">${NOME_PRODUTO} = likely</msg>
+<msg time="2026-04-09T12:34:25.372657" level="INFO">${NOME_PRODUTO} = design</msg>
 <var>${nome}</var>
-<status status="PASS" start="2026-04-09T10:33:01.017942" elapsed="0.000117"/>
+<status status="PASS" start="2026-04-09T12:34:25.372600" elapsed="0.000071"/>
 </variable>
 <variable name="${PRECO_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:01.018206" level="INFO">${PRECO_PRODUTO} = 500</msg>
+<msg time="2026-04-09T12:34:25.372753" level="INFO">${PRECO_PRODUTO} = 500</msg>
 <var>${preco}</var>
-<status status="PASS" start="2026-04-09T10:33:01.018106" elapsed="0.000124"/>
+<status status="PASS" start="2026-04-09T12:34:25.372700" elapsed="0.000067"/>
 </variable>
 <variable name="${DESCRICAO_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:01.018387" level="INFO">${DESCRICAO_PRODUTO} = eletrônicos</msg>
+<msg time="2026-04-09T12:34:25.372883" level="INFO">${DESCRICAO_PRODUTO} = eletrônicos</msg>
 <var>${descricao}</var>
-<status status="PASS" start="2026-04-09T10:33:01.018274" elapsed="0.000130"/>
+<status status="PASS" start="2026-04-09T12:34:25.372801" elapsed="0.000103"/>
 </variable>
 <arg>500</arg>
 <arg>eletrônicos</arg>
 <arg>100</arg>
-<status status="PASS" start="2026-04-09T10:33:00.604181" elapsed="0.414273"/>
+<status status="PASS" start="2026-04-09T12:34:24.951724" elapsed="0.421236"/>
 </kw>
 <kw name="Cadastrar Novo Carrinho Inválido" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.019913" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AES...</msg>
+<msg time="2026-04-09T12:34:25.373919" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.019657" elapsed="0.000275"/>
+<status status="PASS" start="2026-04-09T12:34:25.373661" elapsed="0.000277"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.020200" level="INFO">&amp;{produto1} = { idProduto=FVADmfpOmkMsfbWd | quantidade=2 }</msg>
+<msg time="2026-04-09T12:34:25.374207" level="INFO">&amp;{produto1} = { idProduto=Yvo6kcb4TaT4O65m | quantidade=2 }</msg>
 <var>&amp;{produto1}</var>
 <arg>idProduto=${idProduto1}</arg>
 <arg>quantidade=${quantidade1}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.020011" elapsed="0.000204"/>
+<status status="PASS" start="2026-04-09T12:34:25.374019" elapsed="0.000204"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.020471" level="INFO">&amp;{produto2} = { idProduto=FVADmfpOmkMsfbWd | quantidade=6 }</msg>
+<msg time="2026-04-09T12:34:25.374466" level="INFO">&amp;{produto2} = { idProduto=Yvo6kcb4TaT4O65m | quantidade=6 }</msg>
 <var>&amp;{produto2}</var>
 <arg>idProduto=${idProduto2}</arg>
 <arg>quantidade=${quantidade2}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.020284" elapsed="0.000205"/>
+<status status="PASS" start="2026-04-09T12:34:25.374290" elapsed="0.000192"/>
 </kw>
 <kw name="Create List" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.020711" level="INFO">@{produtos} = [ {'idProduto': 'FVADmfpOmkMsfbWd', 'quantidade': '2'} | {'idProduto': 'FVADmfpOmkMsfbWd', 'quantidade': '6'} ]</msg>
+<msg time="2026-04-09T12:34:25.374705" level="INFO">@{produtos} = [ {'idProduto': 'Yvo6kcb4TaT4O65m', 'quantidade': '2'} | {'idProduto': 'Yvo6kcb4TaT4O65m', 'quantidade': '6'} ]</msg>
 <var>@{produtos}</var>
 <arg>${produto1}</arg>
 <arg>${produto2}</arg>
 <doc>Returns a list containing given items.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.020555" elapsed="0.000171"/>
+<status status="PASS" start="2026-04-09T12:34:25.374548" elapsed="0.000171"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.020953" level="INFO">&amp;{body} = { produtos=[{'idProduto': 'FVADmfpOmkMsfbWd', 'quantidade': '2'}, {'idProduto': 'FVADmfpOmkMsfbWd', 'quantidade': '6'}] }</msg>
+<msg time="2026-04-09T12:34:25.374952" level="INFO">&amp;{body} = { produtos=[{'idProduto': 'Yvo6kcb4TaT4O65m', 'quantidade': '2'}, {'idProduto': 'Yvo6kcb4TaT4O65m', 'quantidade': '6'}] }</msg>
 <var>&amp;{body}</var>
 <arg>produtos=${produtos}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.020790" elapsed="0.000179"/>
+<status status="PASS" start="2026-04-09T12:34:25.374784" elapsed="0.000201"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:01.430227" level="INFO">POST Request : url=https://compassuol.serverest.dev/carrinhos 
+<msg time="2026-04-09T12:34:25.787146" level="INFO">POST Request : url=https://compassuol.serverest.dev/carrinhos 
  path_url=/carrinhos 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNTk4LCJleHAiOjE3NzU3NDIxOTh9.SgrZKXiZ2qk35ehAbEQINzCIoh9Bzf_0AESPUOTXiEA', 'Content-Type': 'application/json', 'Content-Length': '122'} 
- body=b'{"produtos": [{"idProduto": "FVADmfpOmkMsfbWd", "quantidade": "2"}, {"idProduto": "FVADmfpOmkMsfbWd", "quantidade": "6"}]}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGVuYmFybmVzQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODMsImV4cCI6MTc3NTc0OTQ4M30.iXmGMi1kI-ToHZfEIdmr5pMCcktMkPO4eoLrrBGBeJA', 'Content-Type': 'application/json', 'Content-Length': '122'} 
+ body=b'{"produtos": [{"idProduto": "Yvo6kcb4TaT4O65m", "quantidade": "2"}, {"idProduto": "Yvo6kcb4TaT4O65m", "quantidade": "6"}]}' 
  </msg>
-<msg time="2026-04-09T10:33:01.430349" level="INFO">POST Response : url=https://compassuol.serverest.dev/carrinhos 
+<msg time="2026-04-09T12:34:25.787259" level="INFO">POST Response : url=https://compassuol.serverest.dev/carrinhos 
  status=400, reason=Bad Request 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'dc5905de3268427aaf3bbf0453132158', 'date': 'Thu, 09 Apr 2026 13:33:19 GMT', 'server': 'Google Frontend', 'Content-Length': '128'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f151195086570cbb4a32b0322143ace2', 'date': 'Thu, 09 Apr 2026 15:34:44 GMT', 'server': 'Google Frontend', 'Content-Length': '128'} 
  body={
     "message": "Não é permitido possuir produto duplicado",
     "idProdutosDuplicados": [
-        "FVADmfpOmkMsfbWd"
+        "Yvo6kcb4TaT4O65m"
     ]
 } 
  </msg>
-<msg time="2026-04-09T10:33:01.430510" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-09T12:34:25.787410" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/carrinhos</arg>
 <arg>json=&amp;{body}</arg>
 <arg>expected_status=400</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.021036" elapsed="0.409504"/>
+<status status="PASS" start="2026-04-09T12:34:25.375050" elapsed="0.412390"/>
 </kw>
 <arg>${ID_PRODUTO}</arg>
 <arg>2</arg>
 <arg>${ID_PRODUTO}</arg>
 <arg>6</arg>
-<status status="PASS" start="2026-04-09T10:33:01.019299" elapsed="0.411373"/>
+<status status="PASS" start="2026-04-09T12:34:25.373342" elapsed="0.414209"/>
 </kw>
 <doc>Cadastrar um carrinho com o mesmo produto duplicado no array de itens e verificar status 400</doc>
 <tag>cart</tag>
 <tag>genAI</tag>
 <tag>invalid</tag>
 <tag>post</tag>
-<status status="PASS" start="2026-04-09T10:32:59.719092" elapsed="1.712019"/>
+<status status="PASS" start="2026-04-09T12:34:23.650500" elapsed="2.137483"/>
 </test>
 <test id="s1-t2" name="TC-06 - Cadastrar Carrinho Com Produto De Quantidade Negativa" line="49">
-<kw name="Fazer login com &quot;fulano@qa.com&quot; e garantir que não tenha carrinho já criado" owner="ServeRest" type="SETUP">
-<kw name="Fazer login com o email &quot;${EMAIL_ADMIN}&quot; e a senha &quot;${SENHA_ADMIN}&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Fazer login como admin e garantir que não tenha carrinho já criado" owner="ServeRest" type="SETUP">
+<kw name="Email" owner="FakerLibrary">
+<msg time="2026-04-09T12:34:25.789876" level="INFO">${EMAIL_GERADO} = christinechen@example.com</msg>
+<var>${EMAIL_GERADO}</var>
+<status status="PASS" start="2026-04-09T12:34:25.789564" elapsed="0.000333"/>
+</kw>
+<kw name="Criar novo usuário como admin" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.433506" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-04-09T12:34:25.790507" level="INFO">${body} = {'nome': 'Tester', 'email': 'christinechen@example.com', 'password': '123456', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:25.790221" elapsed="0.000304"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:26.200800" level="INFO">POST Request : url=https://compassuol.serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '103', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Tester", "email": "christinechen@example.com", "password": "123456", "administrador": "true"}' 
+ </msg>
+<msg time="2026-04-09T12:34:26.200877" level="INFO">POST Response : url=https://compassuol.serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '512d617e65c80b5b4a32b0322143a681', 'date': 'Thu, 09 Apr 2026 15:34:44 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "TF9DGf8AGhRKeuMR"
+} 
+ </msg>
+<arg>url=${URL}/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:25.790603" elapsed="0.410332"/>
+</kw>
+<arg>Tester</arg>
+<arg>${EMAIL_GERADO}</arg>
+<arg>123456</arg>
+<arg>true</arg>
+<status status="PASS" start="2026-04-09T12:34:25.790005" elapsed="0.411004"/>
+</kw>
+<kw name="Fazer login com o email &quot;${EMAIL_GERADO}&quot; e a senha &quot;123456&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:26.201807" level="INFO">${body} = {'email': 'christinechen@example.com', 'password': '123456'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.433230" elapsed="0.000296"/>
+<status status="PASS" start="2026-04-09T12:34:26.201517" elapsed="0.000310"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:01.857371" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-09T12:34:26.606266" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
- body=b'{"email": "fulano@qa.com", "password": "teste"}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '60', 'Content-Type': 'application/json'} 
+ body=b'{"email": "christinechen@example.com", "password": "123456"}' 
  </msg>
-<msg time="2026-04-09T10:33:01.857578" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-09T12:34:26.606434" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '7764f097ad1dbed2af3bbf04531323ec', 'date': 'Thu, 09 Apr 2026 13:33:20 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '30402a86b86070ac4a32b0322143ac28', 'date': 'Thu, 09 Apr 2026 15:34:45 GMT', 'server': 'Google Frontend', 'Content-Length': '283'} 
  body={
     "message": "Login realizado com sucesso",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQLxBdwC6Y"
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh0qX8sVhJ00lSj5aOB7ych9Msrc"
 } 
  </msg>
-<msg time="2026-04-09T10:33:01.857880" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-09T12:34:26.608142" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.433680" elapsed="0.424455"/>
+<status status="PASS" start="2026-04-09T12:34:26.201907" elapsed="0.406280"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.859419" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU...</msg>
+<msg time="2026-04-09T12:34:26.609039" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg...</msg>
 <var>${login_response_json}</var>
 <arg>${login_response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.858588" elapsed="0.000870"/>
+<status status="PASS" start="2026-04-09T12:34:26.608400" elapsed="0.000672"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.860500" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQLxBdwC6Y</msg>
+<msg time="2026-04-09T12:34:26.609872" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh0qX8sVhJ00lSj5aO...</msg>
 <arg>${TOKEN}</arg>
 <arg>${login_response_json["authorization"]}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.859615" elapsed="0.000935"/>
+<status status="PASS" start="2026-04-09T12:34:26.609199" elapsed="0.000703"/>
 </kw>
 <variable name="${TOKEN}" scope="TEST">
-<msg time="2026-04-09T10:33:01.861022" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQLxBdwC6Y</msg>
+<msg time="2026-04-09T12:34:26.610450" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh0qX8sVhJ00lSj5aOB7ych9M...</msg>
 <var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
-<status status="PASS" start="2026-04-09T10:33:01.860618" elapsed="0.000431"/>
+<status status="PASS" start="2026-04-09T12:34:26.609947" elapsed="0.000557"/>
 </variable>
-<status status="PASS" start="2026-04-09T10:33:01.432992" elapsed="0.428128"/>
+<status status="PASS" start="2026-04-09T12:34:26.201215" elapsed="0.409405"/>
 </kw>
 <kw name="Cancelar uma compra" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:01.861634" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQ...</msg>
+<msg time="2026-04-09T12:34:26.611501" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.861438" elapsed="0.000213"/>
+<status status="PASS" start="2026-04-09T12:34:26.611132" elapsed="0.000398"/>
 </kw>
 <kw name="DELETE" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:02.286051" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+<msg time="2026-04-09T12:34:27.020160" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
  path_url=/carrinhos/cancelar-compra 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQLxBdwC6Y', 'Content-Length': '0'} 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh0qX8sVhJ00lSj5aOB7ych9Msrc', 'Content-Length': '0'} 
  body=None 
  </msg>
-<msg time="2026-04-09T10:33:02.286217" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+<msg time="2026-04-09T12:34:27.020275" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '3e35af50c771450eaf3bbf0453132df0', 'date': 'Thu, 09 Apr 2026 13:33:20 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '91063749ed1cff174a32b0322143a7d3', 'date': 'Thu, 09 Apr 2026 15:34:45 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
  body={
     "message": "Não foi encontrado carrinho para esse usuário"
 } 
@@ -324,185 +408,1275 @@
 <arg>url=${URL}/${CANCELAR}</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a DELETE request.</doc>
-<status status="PASS" start="2026-04-09T10:33:01.861717" elapsed="0.424591"/>
+<status status="PASS" start="2026-04-09T12:34:26.611638" elapsed="0.408716"/>
 </kw>
-<status status="PASS" start="2026-04-09T10:33:01.861252" elapsed="0.425133"/>
+<status status="PASS" start="2026-04-09T12:34:26.610818" elapsed="0.409635"/>
 </kw>
-<status status="PASS" start="2026-04-09T10:33:01.432504" elapsed="0.853915"/>
+<status status="PASS" start="2026-04-09T12:34:25.789378" elapsed="1.231125"/>
 </kw>
 <kw name="Cadastrar Novo Produto" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:02.287391" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQ...</msg>
+<msg time="2026-04-09T12:34:27.021624" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.287123" elapsed="0.000287"/>
+<status status="PASS" start="2026-04-09T12:34:27.021328" elapsed="0.000329"/>
 </kw>
 <kw name="Word" owner="FakerLibrary">
-<msg time="2026-04-09T10:33:02.287651" level="INFO">${nome} = expect</msg>
+<msg time="2026-04-09T12:34:27.021919" level="INFO">${nome} = population</msg>
 <var>${nome}</var>
 <doc>Generate a word.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.287516" elapsed="0.000152"/>
+<status status="PASS" start="2026-04-09T12:34:27.021778" elapsed="0.000163"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:02.287980" level="INFO">${body} = {'nome': 'expect', 'preco': '500', 'descricao': 'eletrônicos', 'quantidade': '100'}</msg>
+<msg time="2026-04-09T12:34:27.022339" level="INFO">${body} = {'nome': 'population', 'preco': '500', 'descricao': 'eletrônicos', 'quantidade': '100'}</msg>
 <var>${body}</var>
 <arg>nome=${nome}</arg>
 <arg>preco=${preco}</arg>
 <arg>descricao=${descricao}</arg>
 <arg>quantidade=${quantidade}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.287742" elapsed="0.000254"/>
+<status status="PASS" start="2026-04-09T12:34:27.022037" elapsed="0.000318"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:02.708607" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-04-09T12:34:27.434294" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
  path_url=/produtos 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQLxBdwC6Y', 'Content-Type': 'application/json', 'Content-Length': '88'} 
- body=b'{"nome": "expect", "preco": "500", "descricao": "eletr\\u00f4nicos", "quantidade": "100"}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh0qX8sVhJ00lSj5aOB7ych9Msrc', 'Content-Type': 'application/json', 'Content-Length': '92'} 
+ body=b'{"nome": "population", "preco": "500", "descricao": "eletr\\u00f4nicos", "quantidade": "100"}' 
  </msg>
-<msg time="2026-04-09T10:33:02.708768" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+<msg time="2026-04-09T12:34:27.434679" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
  status=201, reason=Created 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'ba7f736a1fe16cadaf3bbf0453132659', 'date': 'Thu, 09 Apr 2026 13:33:21 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '9d4e7e18caa53bab4a32b0322143a172', 'date': 'Thu, 09 Apr 2026 15:34:45 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
  body={
     "message": "Cadastro realizado com sucesso",
-    "_id": "q5Tp1TRFDzd0lr09"
+    "_id": "GbGG15GZz41Sh8U2"
 } 
  </msg>
-<msg time="2026-04-09T10:33:02.709871" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<msg time="2026-04-09T12:34:27.436165" level="INFO">${response} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/produtos</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=201</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.288071" elapsed="0.421830"/>
+<status status="PASS" start="2026-04-09T12:34:27.022425" elapsed="0.413780"/>
 </kw>
 <variable name="${ID_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:02.710381" level="INFO">${ID_PRODUTO} = q5Tp1TRFDzd0lr09</msg>
+<msg time="2026-04-09T12:34:27.436733" level="INFO">${ID_PRODUTO} = GbGG15GZz41Sh8U2</msg>
 <var>${response.json()["_id"]}</var>
-<status status="PASS" start="2026-04-09T10:33:02.709988" elapsed="0.000422"/>
+<status status="PASS" start="2026-04-09T12:34:27.436298" elapsed="0.000466"/>
 </variable>
 <variable name="${QUANTIDADE_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:02.710585" level="INFO">${QUANTIDADE_PRODUTO} = 100</msg>
+<msg time="2026-04-09T12:34:27.436945" level="INFO">${QUANTIDADE_PRODUTO} = 100</msg>
 <var>${quantidade}</var>
-<status status="PASS" start="2026-04-09T10:33:02.710475" elapsed="0.000136"/>
+<status status="PASS" start="2026-04-09T12:34:27.436840" elapsed="0.000128"/>
 </variable>
 <variable name="${RESPONSE_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:02.710757" level="INFO">${RESPONSE_PRODUTO} = &lt;Response [201]&gt;</msg>
+<msg time="2026-04-09T12:34:27.437103" level="INFO">${RESPONSE_PRODUTO} = &lt;Response [201]&gt;</msg>
 <var>${response}</var>
-<status status="PASS" start="2026-04-09T10:33:02.710664" elapsed="0.000116"/>
+<status status="PASS" start="2026-04-09T12:34:27.437022" elapsed="0.000095"/>
 </variable>
 <variable name="${NOME_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:02.710908" level="INFO">${NOME_PRODUTO} = expect</msg>
+<msg time="2026-04-09T12:34:27.437193" level="INFO">${NOME_PRODUTO} = population</msg>
 <var>${nome}</var>
-<status status="PASS" start="2026-04-09T10:33:02.710823" elapsed="0.000104"/>
+<status status="PASS" start="2026-04-09T12:34:27.437142" elapsed="0.000065"/>
 </variable>
 <variable name="${PRECO_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:02.711050" level="INFO">${PRECO_PRODUTO} = 500</msg>
+<msg time="2026-04-09T12:34:27.437281" level="INFO">${PRECO_PRODUTO} = 500</msg>
 <var>${preco}</var>
-<status status="PASS" start="2026-04-09T10:33:02.710968" elapsed="0.000103"/>
+<status status="PASS" start="2026-04-09T12:34:27.437233" elapsed="0.000061"/>
 </variable>
 <variable name="${DESCRICAO_PRODUTO}" scope="TEST">
-<msg time="2026-04-09T10:33:02.711159" level="INFO">${DESCRICAO_PRODUTO} = eletrônicos</msg>
+<msg time="2026-04-09T12:34:27.437367" level="INFO">${DESCRICAO_PRODUTO} = eletrônicos</msg>
 <var>${descricao}</var>
-<status status="PASS" start="2026-04-09T10:33:02.711106" elapsed="0.000067"/>
+<status status="PASS" start="2026-04-09T12:34:27.437318" elapsed="0.000063"/>
 </variable>
 <arg>500</arg>
 <arg>eletrônicos</arg>
 <arg>100</arg>
-<status status="PASS" start="2026-04-09T10:33:02.286867" elapsed="0.424349"/>
+<status status="PASS" start="2026-04-09T12:34:27.021016" elapsed="0.416427"/>
 </kw>
 <kw name="Cadastrar Novo Carrinho Inválido" owner="ServeRest">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:02.712382" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQ...</msg>
+<msg time="2026-04-09T12:34:27.438567" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh...</msg>
 <var>&amp;{headers}</var>
 <arg>Authorization=Bearer ${TOKEN}</arg>
 <arg>Content-Type=application/json</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.712089" elapsed="0.000316"/>
+<status status="PASS" start="2026-04-09T12:34:27.438311" elapsed="0.000278"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:02.712719" level="INFO">&amp;{produto1} = { idProduto=BeeJh5lz3k6kSIzA | quantidade=-2 }</msg>
+<msg time="2026-04-09T12:34:27.438868" level="INFO">&amp;{produto1} = { idProduto=BeeJh5lz3k6kSIzA | quantidade=-2 }</msg>
 <var>&amp;{produto1}</var>
 <arg>idProduto=${idProduto1}</arg>
 <arg>quantidade=${quantidade1}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.712511" elapsed="0.000224"/>
+<status status="PASS" start="2026-04-09T12:34:27.438678" elapsed="0.000207"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:02.713009" level="INFO">&amp;{produto2} = { idProduto=q5Tp1TRFDzd0lr09 | quantidade=6 }</msg>
+<msg time="2026-04-09T12:34:27.439132" level="INFO">&amp;{produto2} = { idProduto=GbGG15GZz41Sh8U2 | quantidade=6 }</msg>
 <var>&amp;{produto2}</var>
 <arg>idProduto=${idProduto2}</arg>
 <arg>quantidade=${quantidade2}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.712808" elapsed="0.000217"/>
+<status status="PASS" start="2026-04-09T12:34:27.438955" elapsed="0.000193"/>
 </kw>
 <kw name="Create List" owner="BuiltIn">
-<msg time="2026-04-09T10:33:02.713270" level="INFO">@{produtos} = [ {'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '-2'} | {'idProduto': 'q5Tp1TRFDzd0lr09', 'quantidade': '6'} ]</msg>
+<msg time="2026-04-09T12:34:27.439373" level="INFO">@{produtos} = [ {'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '-2'} | {'idProduto': 'GbGG15GZz41Sh8U2', 'quantidade': '6'} ]</msg>
 <var>@{produtos}</var>
 <arg>${produto1}</arg>
 <arg>${produto2}</arg>
 <doc>Returns a list containing given items.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.713098" elapsed="0.000187"/>
+<status status="PASS" start="2026-04-09T12:34:27.439216" elapsed="0.000172"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-04-09T10:33:02.713540" level="INFO">&amp;{body} = { produtos=[{'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '-2'}, {'idProduto': 'q5Tp1TRFDzd0lr09', 'quantidade': '6'}] }</msg>
+<msg time="2026-04-09T12:34:27.439638" level="INFO">&amp;{body} = { produtos=[{'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '-2'}, {'idProduto': 'GbGG15GZz41Sh8U2', 'quantidade': '6'}] }</msg>
 <var>&amp;{body}</var>
 <arg>produtos=${produtos}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.713355" elapsed="0.000202"/>
+<status status="PASS" start="2026-04-09T12:34:27.439458" elapsed="0.000197"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-04-09T10:33:03.129890" level="INFO">POST Request : url=https://compassuol.serverest.dev/carrinhos 
+<msg time="2026-04-09T12:34:27.843779" level="INFO">POST Request : url=https://compassuol.serverest.dev/carrinhos 
  path_url=/carrinhos 
- headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc1NzQxNjAwLCJleHAiOjE3NzU3NDIyMDB9.Vd4K95IE3aNN07fmcXH5tNdKn_8lrawGHvQLxBdwC6Y', 'Content-Type': 'application/json', 'Content-Length': '123'} 
- body=b'{"produtos": [{"idProduto": "BeeJh5lz3k6kSIzA", "quantidade": "-2"}, {"idProduto": "q5Tp1TRFDzd0lr09", "quantidade": "6"}]}' 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdGluZWNoZW5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg4NSwiZXhwIjoxNzc1NzQ5NDg1fQ.ZxVLVPHqS28kYVOeh0qX8sVhJ00lSj5aOB7ych9Msrc', 'Content-Type': 'application/json', 'Content-Length': '123'} 
+ body=b'{"produtos": [{"idProduto": "BeeJh5lz3k6kSIzA", "quantidade": "-2"}, {"idProduto": "GbGG15GZz41Sh8U2", "quantidade": "6"}]}' 
  </msg>
-<msg time="2026-04-09T10:33:03.129971" level="INFO">POST Response : url=https://compassuol.serverest.dev/carrinhos 
+<msg time="2026-04-09T12:34:27.843932" level="INFO">POST Response : url=https://compassuol.serverest.dev/carrinhos 
  status=400, reason=Bad Request 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '1089aa6ad7d767bfaf3bbf045313230a', 'date': 'Thu, 09 Apr 2026 13:33:21 GMT', 'server': 'Google Frontend', 'Content-Length': '87'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '1f8f88db91ddaafa4a32b0322143a1fb', 'date': 'Thu, 09 Apr 2026 15:34:46 GMT', 'server': 'Google Frontend', 'Content-Length': '87'} 
  body={
     "produtos[0].quantidade": "produtos[0].quantidade deve ser um número positivo"
 } 
  </msg>
-<msg time="2026-04-09T10:33:03.130074" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-09T12:34:27.844136" level="INFO">${response} = &lt;Response [400]&gt;</msg>
 <var>${response}</var>
 <arg>url=${URL}/carrinhos</arg>
 <arg>json=&amp;{body}</arg>
 <arg>expected_status=400</arg>
 <arg>headers=&amp;{headers}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-04-09T10:33:02.713621" elapsed="0.416470"/>
+<status status="PASS" start="2026-04-09T12:34:27.439722" elapsed="0.404458"/>
 </kw>
 <arg>BeeJh5lz3k6kSIzA</arg>
 <arg>-2</arg>
 <arg>${ID_PRODUTO}</arg>
 <arg>6</arg>
-<status status="PASS" start="2026-04-09T10:33:02.711666" elapsed="0.418504"/>
+<status status="PASS" start="2026-04-09T12:34:27.438001" elapsed="0.406314"/>
 </kw>
 <doc>Cadastrar um carrinho com um produto de quantidade negativa e verificar status 400</doc>
 <tag>cart</tag>
 <tag>genAI</tag>
 <tag>invalid</tag>
 <tag>post</tag>
-<status status="PASS" start="2026-04-09T10:33:01.431753" elapsed="1.698657"/>
+<status status="PASS" start="2026-04-09T12:34:25.788897" elapsed="2.055781"/>
+</test>
+<test id="s1-t3" name="TC-07 - Cadastrar Novo Carrinho Com Um Produto Inexistente" line="56">
+<kw name="Fazer login como admin e garantir que não tenha carrinho já criado" owner="ServeRest" type="SETUP">
+<kw name="Email" owner="FakerLibrary">
+<msg time="2026-04-09T12:34:27.847228" level="INFO">${EMAIL_GERADO} = jbrown@example.com</msg>
+<var>${EMAIL_GERADO}</var>
+<status status="PASS" start="2026-04-09T12:34:27.846373" elapsed="0.000897"/>
+</kw>
+<kw name="Criar novo usuário como admin" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:27.848441" level="INFO">${body} = {'nome': 'Tester', 'email': 'jbrown@example.com', 'password': '123456', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:27.847830" elapsed="0.000644"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:28.257290" level="INFO">POST Request : url=https://compassuol.serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '96', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Tester", "email": "jbrown@example.com", "password": "123456", "administrador": "true"}' 
+ </msg>
+<msg time="2026-04-09T12:34:28.257407" level="INFO">POST Response : url=https://compassuol.serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'a8f2fb4c015f637d4a32b0322143aca0', 'date': 'Thu, 09 Apr 2026 15:34:46 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "oWpX00Q4v86SFRtf"
+} 
+ </msg>
+<arg>url=${URL}/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:27.848589" elapsed="0.408892"/>
+</kw>
+<arg>Tester</arg>
+<arg>${EMAIL_GERADO}</arg>
+<arg>123456</arg>
+<arg>true</arg>
+<status status="PASS" start="2026-04-09T12:34:27.847494" elapsed="0.410089"/>
+</kw>
+<kw name="Fazer login com o email &quot;${EMAIL_GERADO}&quot; e a senha &quot;123456&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:28.258575" level="INFO">${body} = {'email': 'jbrown@example.com', 'password': '123456'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:28.258233" elapsed="0.000368"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:28.668282" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '53', 'Content-Type': 'application/json'} 
+ body=b'{"email": "jbrown@example.com", "password": "123456"}' 
+ </msg>
+<msg time="2026-04-09T12:34:28.668521" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '5d34c8b7ae8298f64a32b0322143abe0', 'date': 'Thu, 09 Apr 2026 15:34:47 GMT', 'server': 'Google Frontend', 'Content-Length': '273'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHAiOjE3NzU3NDk0ODd9.0VhNI35WObz8gAZAkl0H5yLvVNpw8e92qT9x2w-JC84"
+} 
+ </msg>
+<msg time="2026-04-09T12:34:28.669972" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<var>${login_response}</var>
+<arg>url=${URL}/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:28.258716" elapsed="0.411307"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-09T12:34:28.670716" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHA...</msg>
+<var>${login_response_json}</var>
+<arg>${login_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-09T12:34:28.670217" elapsed="0.000520"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-04-09T12:34:28.671446" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHAiOjE3NzU3NDk0ODd9.0VhNI35WObz8gAZAkl0H5yLvVNpw8e92qT9x2w-JC84</msg>
+<arg>${TOKEN}</arg>
+<arg>${login_response_json["authorization"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-04-09T12:34:28.670846" elapsed="0.000629"/>
+</kw>
+<variable name="${TOKEN}" scope="TEST">
+<msg time="2026-04-09T12:34:28.671724" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHAiOjE3NzU3NDk0ODd9.0VhNI35WObz8gAZAkl0H5yLvVNpw8e92qT9x2w-JC84</msg>
+<var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
+<status status="PASS" start="2026-04-09T12:34:28.671516" elapsed="0.000225"/>
+</variable>
+<status status="PASS" start="2026-04-09T12:34:28.257858" elapsed="0.413932"/>
+</kw>
+<kw name="Cancelar uma compra" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:28.672230" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHAiOjE3NzU3NDk0ODd9.0VhNI35WObz8gAZAkl0H5yLvVNp...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:28.672036" elapsed="0.000212"/>
+</kw>
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:29.075633" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+ path_url=/carrinhos/cancelar-compra 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHAiOjE3NzU3NDk0ODd9.0VhNI35WObz8gAZAkl0H5yLvVNpw8e92qT9x2w-JC84', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-04-09T12:34:29.075777" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f1dc6fc47f55bee1985272034bd59121', 'date': 'Thu, 09 Apr 2026 15:34:47 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
+ body={
+    "message": "Não foi encontrado carrinho para esse usuário"
+} 
+ </msg>
+<arg>url=${URL}/${CANCELAR}</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="PASS" start="2026-04-09T12:34:28.672327" elapsed="0.403547"/>
+</kw>
+<status status="PASS" start="2026-04-09T12:34:28.671886" elapsed="0.404122"/>
+</kw>
+<status status="PASS" start="2026-04-09T12:34:27.845960" elapsed="1.230119"/>
+</kw>
+<kw name="Cadastrar Novo Carrinho Inválido" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:29.077480" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHAiOjE3NzU3NDk0ODd9.0VhNI35WObz8gAZAkl0H5yLvVNp...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.077075" elapsed="0.000460"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:29.078152" level="INFO">&amp;{produto1} = { idProduto=id_produto_inexistente | quantidade=2 }</msg>
+<var>&amp;{produto1}</var>
+<arg>idProduto=${idProduto1}</arg>
+<arg>quantidade=${quantidade1}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.077724" elapsed="0.000460"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:29.078724" level="INFO">&amp;{produto2} = { idProduto=BeeJh5lz3k6kSIzA | quantidade=3 }</msg>
+<var>&amp;{produto2}</var>
+<arg>idProduto=${idProduto2}</arg>
+<arg>quantidade=${quantidade2}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.078335" elapsed="0.000418"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-09T12:34:29.079203" level="INFO">@{produtos} = [ {'idProduto': 'id_produto_inexistente', 'quantidade': '2'} | {'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '3'} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto1}</arg>
+<arg>${produto2}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.078876" elapsed="0.000362"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:29.079677" level="INFO">&amp;{body} = { produtos=[{'idProduto': 'id_produto_inexistente', 'quantidade': '2'}, {'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '3'}] }</msg>
+<var>&amp;{body}</var>
+<arg>produtos=${produtos}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.079363" elapsed="0.000355"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:29.492909" level="INFO">POST Request : url=https://compassuol.serverest.dev/carrinhos 
+ path_url=/carrinhos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impicm93bkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzc1NzQ4ODg3LCJleHAiOjE3NzU3NDk0ODd9.0VhNI35WObz8gAZAkl0H5yLvVNpw8e92qT9x2w-JC84', 'Content-Type': 'application/json', 'Content-Length': '128'} 
+ body=b'{"produtos": [{"idProduto": "id_produto_inexistente", "quantidade": "2"}, {"idProduto": "BeeJh5lz3k6kSIzA", "quantidade": "3"}]}' 
+ </msg>
+<msg time="2026-04-09T12:34:29.493108" level="INFO">POST Response : url=https://compassuol.serverest.dev/carrinhos 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '5f999e71752e3cb5985272034bd59cdb', 'date': 'Thu, 09 Apr 2026 15:34:48 GMT', 'server': 'Google Frontend', 'Content-Length': '156'} 
+ body={
+    "message": "Produto não encontrado",
+    "item": {
+        "idProduto": "id_produto_inexistente",
+        "quantidade": 2,
+        "index": 0
+    }
+} 
+ </msg>
+<msg time="2026-04-09T12:34:29.494453" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>url=${URL}/carrinhos</arg>
+<arg>json=&amp;{body}</arg>
+<arg>expected_status=400</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.079843" elapsed="0.414653"/>
+</kw>
+<arg>id_produto_inexistente</arg>
+<arg>2</arg>
+<arg>BeeJh5lz3k6kSIzA</arg>
+<arg>3</arg>
+<status status="PASS" start="2026-04-09T12:34:29.076611" elapsed="0.417981"/>
+</kw>
+<doc>Cadastrar um carrinho com um produto de ID inexistente e verificar status 400</doc>
+<tag>cart</tag>
+<tag>genAI</tag>
+<tag>invalid</tag>
+<tag>post</tag>
+<status status="PASS" start="2026-04-09T12:34:27.845227" elapsed="1.649744"/>
+</test>
+<test id="s1-t4" name="TC-12 - Concluir Uma Compra Sem Carrinho Existente" line="97">
+<kw name="Fazer login como admin e garantir que não tenha carrinho já criado" owner="ServeRest" type="SETUP">
+<kw name="Email" owner="FakerLibrary">
+<msg time="2026-04-09T12:34:29.497100" level="INFO">${EMAIL_GERADO} = leonardcynthia@example.net</msg>
+<var>${EMAIL_GERADO}</var>
+<status status="PASS" start="2026-04-09T12:34:29.496816" elapsed="0.000305"/>
+</kw>
+<kw name="Criar novo usuário como admin" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:29.497706" level="INFO">${body} = {'nome': 'Tester', 'email': 'leonardcynthia@example.net', 'password': '123456', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.497432" elapsed="0.000292"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:29.927903" level="INFO">POST Request : url=https://compassuol.serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '104', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Tester", "email": "leonardcynthia@example.net", "password": "123456", "administrador": "true"}' 
+ </msg>
+<msg time="2026-04-09T12:34:29.928016" level="INFO">POST Response : url=https://compassuol.serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'bfbbc117a0946c75985272034bd59396', 'date': 'Thu, 09 Apr 2026 15:34:48 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "6gxmf4MicDkSYk6g"
+} 
+ </msg>
+<arg>url=${URL}/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.497800" elapsed="0.430299"/>
+</kw>
+<arg>Tester</arg>
+<arg>${EMAIL_GERADO}</arg>
+<arg>123456</arg>
+<arg>true</arg>
+<status status="PASS" start="2026-04-09T12:34:29.497232" elapsed="0.430977"/>
+</kw>
+<kw name="Fazer login com o email &quot;${EMAIL_GERADO}&quot; e a senha &quot;123456&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:29.929137" level="INFO">${body} = {'email': 'leonardcynthia@example.net', 'password': '123456'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.928801" elapsed="0.000372"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:30.333766" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '61', 'Content-Type': 'application/json'} 
+ body=b'{"email": "leonardcynthia@example.net", "password": "123456"}' 
+ </msg>
+<msg time="2026-04-09T12:34:30.333951" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'bda11ddb56e6bf1a985272034bd59385', 'date': 'Thu, 09 Apr 2026 15:34:48 GMT', 'server': 'Google Frontend', 'Content-Length': '284'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODgsImV4cCI6MTc3NTc0OTQ4OH0.J-E6meLEbVl4QTNujB5CNNkae7wjvH_fsclE--T34UY"
+} 
+ </msg>
+<msg time="2026-04-09T12:34:30.335717" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<var>${login_response}</var>
+<arg>url=${URL}/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:29.929324" elapsed="0.406444"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-09T12:34:30.336605" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg...</msg>
+<var>${login_response_json}</var>
+<arg>${login_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-09T12:34:30.335983" elapsed="0.000650"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-04-09T12:34:30.338023" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODgsImV4cCI6MTc3NTc0OTQ4OH0.J-E6meLEbVl4QTNujB5CNNkae7wjvH_f...</msg>
+<arg>${TOKEN}</arg>
+<arg>${login_response_json["authorization"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-04-09T12:34:30.336847" elapsed="0.001237"/>
+</kw>
+<variable name="${TOKEN}" scope="TEST">
+<msg time="2026-04-09T12:34:30.338388" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODgsImV4cCI6MTc3NTc0OTQ4OH0.J-E6meLEbVl4QTNujB5CNNkae7wjvH_fsclE--T...</msg>
+<var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
+<status status="PASS" start="2026-04-09T12:34:30.338138" elapsed="0.000270"/>
+</variable>
+<status status="PASS" start="2026-04-09T12:34:29.928470" elapsed="0.410013"/>
+</kw>
+<kw name="Cancelar uma compra" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:30.339148" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODgsImV4cCI6MTc3NTc0OTQ4OH0.J-E6meLEbVl4QTNu...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:30.338886" elapsed="0.000282"/>
+</kw>
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:30.748406" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+ path_url=/carrinhos/cancelar-compra 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODgsImV4cCI6MTc3NTc0OTQ4OH0.J-E6meLEbVl4QTNujB5CNNkae7wjvH_fsclE--T34UY', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-04-09T12:34:30.748505" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '212ef746e47d02a6985272034bd5930f', 'date': 'Thu, 09 Apr 2026 15:34:49 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
+ body={
+    "message": "Não foi encontrado carrinho para esse usuário"
+} 
+ </msg>
+<arg>url=${URL}/${CANCELAR}</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="PASS" start="2026-04-09T12:34:30.339244" elapsed="0.409331"/>
+</kw>
+<status status="PASS" start="2026-04-09T12:34:30.338648" elapsed="0.410021"/>
+</kw>
+<status status="PASS" start="2026-04-09T12:34:29.496641" elapsed="1.252096"/>
+</kw>
+<kw name="Concluir Uma Compra Sem Carrinho Vinculado" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:30.750007" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODgsImV4cCI6MTc3NTc0OTQ4OH0.J-E6meLEbVl4QTNu...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:30.749472" elapsed="0.000570"/>
+</kw>
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:31.157821" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/concluir-compra 
+ path_url=/carrinhos/concluir-compra 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imxlb25hcmRjeW50aGlhQGV4YW1wbGUubmV0IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3NzU3NDg4ODgsImV4cCI6MTc3NTc0OTQ4OH0.J-E6meLEbVl4QTNujB5CNNkae7wjvH_fsclE--T34UY', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-04-09T12:34:31.157972" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/concluir-compra 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '85431eb8ddab2929985272034bd59570', 'date': 'Thu, 09 Apr 2026 15:34:49 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
+ body={
+    "message": "Não foi encontrado carrinho para esse usuário"
+} 
+ </msg>
+<msg time="2026-04-09T12:34:31.159231" level="FAIL">Url: https://compassuol.serverest.dev/carrinhos/concluir-compra Expected status: 200 != 400</msg>
+<arg>url=${URL}/${CONCLUIR}</arg>
+<arg>headers=&amp;{headers}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="FAIL" start="2026-04-09T12:34:30.750382" elapsed="0.410972">Url: https://compassuol.serverest.dev/carrinhos/concluir-compra Expected status: 200 != 400</status>
+</kw>
+<status status="FAIL" start="2026-04-09T12:34:30.749146" elapsed="0.412349">Url: https://compassuol.serverest.dev/carrinhos/concluir-compra Expected status: 200 != 400</status>
+</kw>
+<doc>Concluir uma compra com um token sem carrinho vinculado e verificar status 400</doc>
+<tag>cart</tag>
+<tag>delete</tag>
+<tag>genAI</tag>
+<tag>invalid</tag>
+<status status="FAIL" start="2026-04-09T12:34:29.495915" elapsed="1.665950">Url: https://compassuol.serverest.dev/carrinhos/concluir-compra Expected status: 200 != 400</status>
+</test>
+<test id="s1-t5" name="TC-13 - Listar Todos Os Carrinhos" line="103">
+<kw name="No Operation" owner="BuiltIn" type="SETUP">
+<doc>Does absolutely nothing.</doc>
+<status status="PASS" start="2026-04-09T12:34:31.162557" elapsed="0.000249"/>
+</kw>
+<kw name="Listar Todos Os Carrinhos" owner="ServeRest">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:31.590757" level="INFO">GET Request : url=https://compassuol.serverest.dev/carrinhos 
+ path_url=/carrinhos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-04-09T12:34:31.590858" level="INFO">GET Response : url=https://compassuol.serverest.dev/carrinhos 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '53a0eb7655146aa9985272034bd59f8c', 'date': 'Thu, 09 Apr 2026 15:34:50 GMT', 'server': 'Google Frontend', 'Content-Length': '11056'} 
+ body={
+    "quantidade": 28,
+    "carrinhos": [
+        {
+            "produtos": [
+                {
+                    "idProduto": "7nM6hwXlSPCYAgCP",
+                    "quantidade": 1,
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": 1,
+            "idUsuario": "1ostSxCtfkeDFFE1",
+            "_id": "1KieyqiwBUtd7DJD"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "BeeJh5lz3k6kSIzA",
+                    "quantidade": "2",
+                    "precoUnitario": 470
+                },
+                {
+                    "idProduto": "NQW1S3uY3n2KVRBA",
+                    "quantidade": "3",
+                    "precoUnitario": 500
+                }
+            ],
+            "precoTotal": 2440,
+            "quantidadeTotal": "023",
+            "idUsuario": "rW2psWFLttYc4ayQ",
+            "_id": "2yLVwjUV0ZUYCxnw"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "jRcqrhuTHspAN1bQ",
+                    "quantidade": "1",
+                    "precoUnitario": 110
+                }
+            ],
+            "precoTotal": 110,
+            "quantidadeTotal": "01",
+            "idUsuario": "utVmQuU9o4Pflq7U",
+            "_id": "4eu5o5CGelHyfAqw"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "6d0x8LwCdoweznBI",
+                    "quantidade": 1,
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": 1,
+            "idUsuario": "p3WZqSN42bfaRiOh",
+            "_id": "8IEmfLU0wt4ufqVX"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "hRbhSNSLWmaXZIED",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "yYARoZaggpj1UMUb",
+            "_id": "8qnwuqzZL1UXli58"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "7JF2qyL3grNshHAl",
+                    "quantidade": 1,
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": 1,
+            "idUsuario": "D6Qlnxv0aPpcA41v",
+            "_id": "G2g7B1pHUeDK3EPD"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "BeeJh5lz3k6kSIzA",
+                    "quantidade": 1,
+                    "precoUnitario": 470
+                }
+            ],
+            "precoTotal": 470,
+            "quantidadeTotal": 1,
+            "idUsuario": "hCQtyQNYAQCUWmTe",
+            "_id": "ISOSMylpmhzDQewy"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "fGpsj2x0wiPHLjH2",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "nqwQzLaJKHfiGiHF",
+            "_id": "NlSADMvMaUZEGmSU"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "vJXGvjGhgB4rBdfl",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "ljeM9TbvsRIWpR0X",
+            "_id": "OnPRq6dTUiCVHMBc"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "l02sZjTdVmdki2lS",
+                    "quantidade": "2",
+                    "precoUnitario": 250
+                }
+            ],
+            "precoTotal": 500,
+            "quantidadeTotal": "02",
+            "idUsuario": "vGZvIWqNJa3LL4q9",
+            "_id": "QDYmh5sV6oGPoWZJ"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "XIekxop0kLvZ70V5",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "uKdGHiIdho1qZBwo",
+            "_id": "Qu9z9MiY7DGG0Jv4"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "B8nfYjEfp16T0Jol",
+                    "quantidade": "34",
+                    "precoUnitario": 1878
+                }
+            ],
+            "precoTotal": 63852,
+            "quantidadeTotal": "034",
+            "idUsuario": "ElyOse9W43Gcfgrm",
+            "_id": "RMtSSYU0t7TRz1Di"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "iI9Bhx9BPVqvBhcK",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "jah0o1jdZWwEZv4M",
+            "_id": "RT86Uw9Ov9Bl5sZz"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "y6cQs6b1ZyhoY2KW",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "TjRyIva76Gr2uhKG",
+            "_id": "TRH85c0ylLCdR5Wm"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "jUzkpGhNLBAeVsNW",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "sAIu6m8ibbt6TzsU",
+            "_id": "TWNZNazAKsS0VZrS"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "L6z1KwCOFJPYiptV",
+                    "quantidade": 1,
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": 1,
+            "idUsuario": "H5KxYJGBokEYwnyG",
+            "_id": "Ti3X78N6zQfTl1ym"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "Hq7PxARuL2WateOk",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "HsxOH0R5ALb5qSlE",
+            "_id": "VWtv871uicazVrL6"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "G50txrl3TnWMAUjb",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "IzfWRTDKlsbsmgS9",
+            "_id": "WtzKaMSCzaNr7WPB"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "9jRSc7cbl4LOuXhm",
+                    "quantidade": 1,
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": 1,
+            "idUsuario": "kwl9ll3bYSI660DO",
+            "_id": "YuVhxnN9T2BOJYT5"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "15xqTZ03ssiThzvn",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "5jq9dEtYVU6gEzA4",
+            "_id": "bVPw27Pg35rg57QD"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "3wlsKsrscnnZziWx",
+                    "quantidade": 1,
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": 1,
+            "idUsuario": "iOrSMrQBe3knp0ev",
+            "_id": "frOakj6kf8YsaF4S"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "h3ATZKfWj98725ry",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "J4EncGUjy0coK77k",
+            "_id": "gOXX3or6vfmYtVfj"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "uooM1koBfPpuJFq8",
+                    "quantidade": 1,
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": 1,
+            "idUsuario": "j28ThnxzUmHVvMo8",
+            "_id": "nQPJBw4VfXAf8I69"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "YKgO01XOCtotrS40",
+                    "quantidade": "692",
+                    "precoUnitario": 370
+                }
+            ],
+            "precoTotal": 256040,
+            "quantidadeTotal": "0692",
+            "idUsuario": "dmlPt7HhW4v7So2S",
+            "_id": "nohHunbZ5GG8pDsJ"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "l6KN4bYBkGe1oZ77",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            "quantidadeTotal": "01",
+            "idUsuario": "ORvalTcedrgCsb2T",
+            "_id": "oLi65gIOQZnhONOZ"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "cnVAGczCjCj51dSZ",
+                    "quantidade": "1",
+                    "precoUnitario": 100
+                }
+            ],
+            "precoTotal": 100,
+            ... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg time="2026-04-09T12:34:31.591084" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${URL}/carrinhos</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2026-04-09T12:34:31.163207" elapsed="0.427910"/>
+</kw>
+<variable name="${RESPONSE_GET_CARRINHO}" scope="TEST">
+<msg time="2026-04-09T12:34:31.591335" level="INFO">${RESPONSE_GET_CARRINHO} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2026-04-09T12:34:31.591207" elapsed="0.000155"/>
+</variable>
+<status status="PASS" start="2026-04-09T12:34:31.163044" elapsed="0.428391"/>
+</kw>
+<doc>Listar todos os carrinhos cadastrados e verificar status 200</doc>
+<tag>cart</tag>
+<tag>genAI</tag>
+<tag>get</tag>
+<tag>valid</tag>
+<status status="PASS" start="2026-04-09T12:34:31.162194" elapsed="0.429595"/>
+</test>
+<test id="s1-t6" name="TC-14 - Buscar Carrinho Pelo Id" line="110">
+<kw name="Fazer login como admin e garantir que não tenha carrinho já criado" owner="ServeRest" type="SETUP">
+<kw name="Email" owner="FakerLibrary">
+<msg time="2026-04-09T12:34:31.593453" level="INFO">${EMAIL_GERADO} = julie33@example.com</msg>
+<var>${EMAIL_GERADO}</var>
+<status status="PASS" start="2026-04-09T12:34:31.593141" elapsed="0.000343"/>
+</kw>
+<kw name="Criar novo usuário como admin" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:31.594214" level="INFO">${body} = {'nome': 'Tester', 'email': 'julie33@example.com', 'password': '123456', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>nome=${nome}</arg>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<arg>administrador=${administrador}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:31.593866" elapsed="0.000367"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:32.010920" level="INFO">POST Request : url=https://compassuol.serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '97', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Tester", "email": "julie33@example.com", "password": "123456", "administrador": "true"}' 
+ </msg>
+<msg time="2026-04-09T12:34:32.011089" level="INFO">POST Response : url=https://compassuol.serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '59407d9c59ec4fa6985272034bd5991e', 'date': 'Thu, 09 Apr 2026 15:34:50 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "S9hc3mo3yr5z7lkS"
+} 
+ </msg>
+<arg>url=${URL}/usuarios</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:31.594313" elapsed="0.416911"/>
+</kw>
+<arg>Tester</arg>
+<arg>${EMAIL_GERADO}</arg>
+<arg>123456</arg>
+<arg>true</arg>
+<status status="PASS" start="2026-04-09T12:34:31.593621" elapsed="0.417770"/>
+</kw>
+<kw name="Fazer login com o email &quot;${EMAIL_GERADO}&quot; e a senha &quot;123456&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:32.012681" level="INFO">${body} = {'email': 'julie33@example.com', 'password': '123456'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<arg>password=${PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.012270" elapsed="0.000442"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:32.416551" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '54', 'Content-Type': 'application/json'} 
+ body=b'{"email": "julie33@example.com", "password": "123456"}' 
+ </msg>
+<msg time="2026-04-09T12:34:32.416627" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '89ab0b0f1b3dc424985272034bd597d4', 'date': 'Thu, 09 Apr 2026 15:34:50 GMT', 'server': 'Google Frontend', 'Content-Length': '275'} 
+ body={
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFABTThK_vREQJfGkc9RY"
+} 
+ </msg>
+<msg time="2026-04-09T12:34:32.417532" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<var>${login_response}</var>
+<arg>url=${URL}/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.012835" elapsed="0.404736"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-09T12:34:32.418434" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXh...</msg>
+<var>${login_response_json}</var>
+<arg>${login_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.417780" elapsed="0.000682"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-04-09T12:34:32.419308" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFABTThK_vREQJfGkc9...</msg>
+<arg>${TOKEN}</arg>
+<arg>${login_response_json["authorization"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.418596" elapsed="0.000748"/>
+</kw>
+<variable name="${TOKEN}" scope="TEST">
+<msg time="2026-04-09T12:34:32.419611" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFABTThK_vREQJfGkc9RY</msg>
+<var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
+<status status="PASS" start="2026-04-09T12:34:32.419391" elapsed="0.000238"/>
+</variable>
+<status status="PASS" start="2026-04-09T12:34:32.011844" elapsed="0.407835"/>
+</kw>
+<kw name="Cancelar uma compra" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:32.420211" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFA...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.419970" elapsed="0.000260"/>
+</kw>
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:32.821254" level="INFO">DELETE Request : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+ path_url=/carrinhos/cancelar-compra 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFABTThK_vREQJfGkc9RY', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-04-09T12:34:32.821401" level="INFO">DELETE Response : url=https://compassuol.serverest.dev/carrinhos/cancelar-compra 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'c58ba47111a17480985272034bd59e45', 'date': 'Thu, 09 Apr 2026 15:34:51 GMT', 'server': 'Google Frontend', 'Content-Length': '68'} 
+ body={
+    "message": "Não foi encontrado carrinho para esse usuário"
+} 
+ </msg>
+<arg>url=${URL}/${CANCELAR}</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.420310" elapsed="0.401214"/>
+</kw>
+<status status="PASS" start="2026-04-09T12:34:32.419790" elapsed="0.401853"/>
+</kw>
+<status status="PASS" start="2026-04-09T12:34:31.592856" elapsed="1.228854"/>
+</kw>
+<kw name="Cadastrar Novo Produto" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:32.823251" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFA...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.822739" elapsed="0.000545"/>
+</kw>
+<kw name="Word" owner="FakerLibrary">
+<msg time="2026-04-09T12:34:32.823500" level="INFO">${nome} = treatment</msg>
+<var>${nome}</var>
+<doc>Generate a word.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.823375" elapsed="0.000143"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:32.823887" level="INFO">${body} = {'nome': 'treatment', 'preco': '500', 'descricao': 'eletrodomesticos', 'quantidade': '100'}</msg>
+<var>${body}</var>
+<arg>nome=${nome}</arg>
+<arg>preco=${preco}</arg>
+<arg>descricao=${descricao}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.823606" elapsed="0.000301"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:33.222198" level="INFO">POST Request : url=https://compassuol.serverest.dev/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFABTThK_vREQJfGkc9RY', 'Content-Type': 'application/json', 'Content-Length': '91'} 
+ body=b'{"nome": "treatment", "preco": "500", "descricao": "eletrodomesticos", "quantidade": "100"}' 
+ </msg>
+<msg time="2026-04-09T12:34:33.222328" level="INFO">POST Response : url=https://compassuol.serverest.dev/produtos 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '89059033d9759646985272034bd59886', 'date': 'Thu, 09 Apr 2026 15:34:51 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "MVqje5KejiU9pNQT"
+} 
+ </msg>
+<msg time="2026-04-09T12:34:33.223486" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>url=${URL}/produtos</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:32.824004" elapsed="0.399529"/>
+</kw>
+<variable name="${ID_PRODUTO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.224078" level="INFO">${ID_PRODUTO} = MVqje5KejiU9pNQT</msg>
+<var>${response.json()["_id"]}</var>
+<status status="PASS" start="2026-04-09T12:34:33.223633" elapsed="0.000475"/>
+</variable>
+<variable name="${QUANTIDADE_PRODUTO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.224257" level="INFO">${QUANTIDADE_PRODUTO} = 100</msg>
+<var>${quantidade}</var>
+<status status="PASS" start="2026-04-09T12:34:33.224164" elapsed="0.000116"/>
+</variable>
+<variable name="${RESPONSE_PRODUTO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.224405" level="INFO">${RESPONSE_PRODUTO} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2026-04-09T12:34:33.224324" elapsed="0.000103"/>
+</variable>
+<variable name="${NOME_PRODUTO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.224552" level="INFO">${NOME_PRODUTO} = treatment</msg>
+<var>${nome}</var>
+<status status="PASS" start="2026-04-09T12:34:33.224468" elapsed="0.000107"/>
+</variable>
+<variable name="${PRECO_PRODUTO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.224661" level="INFO">${PRECO_PRODUTO} = 500</msg>
+<var>${preco}</var>
+<status status="PASS" start="2026-04-09T12:34:33.224609" elapsed="0.000064"/>
+</variable>
+<variable name="${DESCRICAO_PRODUTO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.224746" level="INFO">${DESCRICAO_PRODUTO} = eletrodomesticos</msg>
+<var>${descricao}</var>
+<status status="PASS" start="2026-04-09T12:34:33.224697" elapsed="0.000062"/>
+</variable>
+<arg>500</arg>
+<arg>eletrodomesticos</arg>
+<arg>100</arg>
+<status status="PASS" start="2026-04-09T12:34:32.822356" elapsed="0.402446"/>
+</kw>
+<kw name="Cadastrar Novo Carrinho" owner="ServeRest">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:33.226075" level="INFO">&amp;{headers} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFA...</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:33.225785" elapsed="0.000311"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:33.226380" level="INFO">&amp;{produto1} = { idProduto=BeeJh5lz3k6kSIzA | quantidade=2 }</msg>
+<var>&amp;{produto1}</var>
+<arg>idProduto=${idProduto1}</arg>
+<arg>quantidade=${quantidade1}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:33.226184" elapsed="0.000212"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:33.226648" level="INFO">&amp;{produto2} = { idProduto=MVqje5KejiU9pNQT | quantidade=3 }</msg>
+<var>&amp;{produto2}</var>
+<arg>idProduto=${idProduto2}</arg>
+<arg>quantidade=${quantidade2}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:33.226466" elapsed="0.000197"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-09T12:34:33.226932" level="INFO">@{produtos} = [ {'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '2'} | {'idProduto': 'MVqje5KejiU9pNQT', 'quantidade': '3'} ]</msg>
+<var>@{produtos}</var>
+<arg>${produto1}</arg>
+<arg>${produto2}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-09T12:34:33.226730" elapsed="0.000219"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-09T12:34:33.227202" level="INFO">&amp;{body} = { produtos=[{'idProduto': 'BeeJh5lz3k6kSIzA', 'quantidade': '2'}, {'idProduto': 'MVqje5KejiU9pNQT', 'quantidade': '3'}] }</msg>
+<var>&amp;{body}</var>
+<arg>produtos=${produtos}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-09T12:34:33.227028" elapsed="0.000189"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:33.634232" level="INFO">POST Request : url=https://compassuol.serverest.dev/carrinhos 
+ path_url=/carrinhos 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bGllMzNAZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTc3NTc0ODg5MCwiZXhwIjoxNzc1NzQ5NDkwfQ.y9inpilW3Xr7dSzeM0_BEqTFABTThK_vREQJfGkc9RY', 'Content-Type': 'application/json', 'Content-Length': '122'} 
+ body=b'{"produtos": [{"idProduto": "BeeJh5lz3k6kSIzA", "quantidade": "2"}, {"idProduto": "MVqje5KejiU9pNQT", "quantidade": "3"}]}' 
+ </msg>
+<msg time="2026-04-09T12:34:33.634742" level="INFO">POST Response : url=https://compassuol.serverest.dev/carrinhos 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f13e07581a7bed72985272034bd59c20', 'date': 'Thu, 09 Apr 2026 15:34:52 GMT', 'server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "T2RCOCo80nBVLUQP"
+} 
+ </msg>
+<msg time="2026-04-09T12:34:33.635224" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>url=${URL}/carrinhos</arg>
+<arg>json=&amp;{body}</arg>
+<arg>expected_status=201</arg>
+<arg>headers=&amp;{headers}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-09T12:34:33.227282" elapsed="0.408017"/>
+</kw>
+<variable name="${ID_CARRINHO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.636399" level="INFO">${ID_CARRINHO} = T2RCOCo80nBVLUQP</msg>
+<var>${response.json()["_id"]}</var>
+<status status="PASS" start="2026-04-09T12:34:33.635506" elapsed="0.000936"/>
+</variable>
+<variable name="${QUANTIDADE_PRODUTO2_CARRINHO}" scope="TEST">
+<msg time="2026-04-09T12:34:33.636654" level="INFO">${QUANTIDADE_PRODUTO2_CARRINHO} = 3</msg>
+<var>${quantidade2}</var>
+<status status="PASS" start="2026-04-09T12:34:33.636524" elapsed="0.000157"/>
+</variable>
+<arg>BeeJh5lz3k6kSIzA</arg>
+<arg>2</arg>
+<arg>${ID_PRODUTO}</arg>
+<arg>3</arg>
+<status status="PASS" start="2026-04-09T12:34:33.225296" elapsed="0.411463"/>
+</kw>
+<kw name="Buscar Carrinho Pelo ID" owner="ServeRest">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2026-04-09T12:34:34.038401" level="INFO">GET Request : url=https://compassuol.serverest.dev/carrinhos/T2RCOCo80nBVLUQP 
+ path_url=/carrinhos/T2RCOCo80nBVLUQP 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-04-09T12:34:34.038555" level="INFO">GET Response : url=https://compassuol.serverest.dev/carrinhos/T2RCOCo80nBVLUQP 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '0a175913ef80f666985272034bd59617', 'date': 'Thu, 09 Apr 2026 15:34:52 GMT', 'server': 'Google Frontend', 'Content-Length': '408'} 
+ body={
+    "produtos": [
+        {
+            "idProduto": "BeeJh5lz3k6kSIzA",
+            "quantidade": "2",
+            "precoUnitario": 470
+        },
+        {
+            "idProduto": "MVqje5KejiU9pNQT",
+            "quantidade": "3",
+            "precoUnitario": 500
+        }
+    ],
+    "precoTotal": 2440,
+    "quantidadeTotal": "023",
+    "idUsuario": "S9hc3mo3yr5z7lkS",
+    "_id": "T2RCOCo80nBVLUQP"
+} 
+ </msg>
+<msg time="2026-04-09T12:34:34.038755" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${URL}/carrinhos/${ID_CARRINHO}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2026-04-09T12:34:33.637605" elapsed="0.401192"/>
+</kw>
+<variable name="${RESPONSE_GET_CARRINHO}" scope="TEST">
+<msg time="2026-04-09T12:34:34.039331" level="INFO">${RESPONSE_GET_CARRINHO} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2026-04-09T12:34:34.038914" elapsed="0.000457"/>
+</variable>
+<status status="PASS" start="2026-04-09T12:34:33.637189" elapsed="0.402293"/>
+</kw>
+<doc>Buscar um carrinho pelo ID após cadastro e verificar status 200</doc>
+<tag>cart</tag>
+<tag>genAI</tag>
+<tag>get</tag>
+<tag>valid</tag>
+<status status="PASS" start="2026-04-09T12:34:31.592380" elapsed="2.447597"/>
 </test>
 <doc>Essa suíte testa o endpoint /carrinhos da aplicação ServeRest</doc>
-<status status="PASS" start="2026-04-09T10:32:59.382575" elapsed="3.748285"/>
+<status status="FAIL" start="2026-04-09T12:34:23.324885" elapsed="10.715891"/>
 </suite>
 <statistics>
 <total>
-<stat pass="2" fail="0" skip="0">All Tests</stat>
+<stat pass="5" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="2" fail="0" skip="0">cart</stat>
-<stat pass="2" fail="0" skip="0">genAI</stat>
-<stat pass="2" fail="0" skip="0">invalid</stat>
-<stat pass="2" fail="0" skip="0">post</stat>
+<stat pass="5" fail="1" skip="0">cart</stat>
+<stat pass="0" fail="1" skip="0">delete</stat>
+<stat pass="5" fail="1" skip="0">genAI</stat>
+<stat pass="2" fail="0" skip="0">get</stat>
+<stat pass="3" fail="1" skip="0">invalid</stat>
+<stat pass="3" fail="0" skip="0">post</stat>
+<stat pass="2" fail="0" skip="0">valid</stat>
 </tag>
 <suite>
-<stat name="Carrinho" id="s1" pass="2" fail="0" skip="0">Carrinho</stat>
+<stat name="Carrinho" id="s1" pass="5" fail="1" skip="0">Carrinho</stat>
 </suite>
 </statistics>
 <errors>
