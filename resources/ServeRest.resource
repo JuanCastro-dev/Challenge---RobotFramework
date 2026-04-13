@@ -38,6 +38,24 @@ Fazer login com payload incompleto com o email "${EMAIL}"
 
     ${login_response}    POST    url=${URL}/login    json=${body}    expected_status=400
 
+#------------------------------------------- KeyWords Auxiliares -------------------------------------------
+Criar Body Produto
+    [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}
+    [Return]    &{body}
+    &{body}    Create Dictionary
+    ...    nome=${nome}
+    ...    preco=${preco}
+    ...    descricao=${descricao}
+    ...    quantidade=${quantidade}
+
+Criar Body Carrinho
+    [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
+    [Return]    &{body}
+    &{produto1}    Create Dictionary    idProduto=${idProduto1}    quantidade=${quantidade1}
+    &{produto2}    Create Dictionary    idProduto=${idProduto2}    quantidade=${quantidade2}
+    @{produtos}    Create List          ${produto1}    ${produto2}
+    &{body}        Create Dictionary    produtos=${produtos}
+
 #------------------------------------------- KeyWords para Produtos -------------------------------------------
 #---POST---
 Cadastrar Novo Produto
@@ -46,14 +64,9 @@ Cadastrar Novo Produto
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
 
     ${nome}    FakerLibrary.Word
+    &{body}    Criar Body Produto    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
-    ${body}    Create Dictionary
-    ...    nome=${nome}
-    ...    preco=${preco}
-    ...    descricao=${descricao}
-    ...    quantidade=${quantidade}
-
-    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=201    headers=&{headers}
+    ${response}    POST    url=${URL}/produtos    json=&{body}    expected_status=201    headers=&{headers}
 
     VAR    ${ID_PRODUTO}           ${response.json()["_id"]}    scope=TEST
     VAR    ${QUANTIDADE_PRODUTO}    ${quantidade}               scope=TEST
@@ -68,43 +81,27 @@ Cadastrar Novo Produto Inválido
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
 
     ${nome}    Generate Random String    length=10    chars=[LETTERS]
+    &{body}    Criar Body Produto    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
-    ${body}    Create Dictionary
-    ...    nome=${nome}
-    ...    preco=${preco}
-    ...    descricao=${descricao}
-    ...    quantidade=${quantidade}
-
-    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    ${response}    POST    url=${URL}/produtos    json=&{body}    expected_status=${status_esperado}    headers=&{headers}
     VAR    ${RESPONSE_PRODUTO}    ${response}    scope=TEST
 
 Cadastrar Novo Produto Com Nome Já Utilizado
     [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+    &{body}    Criar Body Produto    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
-    ${body}    Create Dictionary
-    ...    nome=${nome}
-    ...    preco=${preco}
-    ...    descricao=${descricao}
-    ...    quantidade=${quantidade}
-
-    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=400    headers=&{headers}
+    ${response}    POST    url=${URL}/produtos    json=&{body}    expected_status=400    headers=&{headers}
 
 Cadastrar Novo Produto Sem Permissão
     [Arguments]    ${preco}    ${descricao}    ${quantidade}
 
     &{headers}    Create Dictionary    Authorization=Bearer token_invalido    Content-Type=application/json
-
     ${nome}    Generate Random String    length=10    chars=[LETTERS]
+    &{body}    Criar Body Produto    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
-    ${body}    Create Dictionary
-    ...    nome=${nome}
-    ...    preco=${preco}
-    ...    descricao=${descricao}
-    ...    quantidade=${quantidade}
-
-    ${response}    POST    url=${URL}/produtos    json=${body}    expected_status=401    headers=&{headers}
+    ${response}    POST    url=${URL}/produtos    json=&{body}    expected_status=401    headers=&{headers}
 
 #---GET---
 Buscar Produto Pelo ID
@@ -128,16 +125,10 @@ Alterar Produto
     [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
 
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
-
     ${nome}    FakerLibrary.Word
+    &{body}    Criar Body Produto    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
-    ${body}    Create Dictionary
-    ...    nome=${nome}
-    ...    preco=${preco}
-    ...    descricao=${descricao}
-    ...    quantidade=${quantidade}
-
-    ${response}    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    ${response}    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=&{body}    expected_status=${status_esperado}    headers=&{headers}
     VAR    ${RESPONSE_PRODUTO}      ${response}     scope=TEST
     VAR    ${NOME_PRODUTO}          ${nome}         scope=TEST
     VAR    ${PRECO_PRODUTO}         ${preco}        scope=TEST
@@ -148,29 +139,18 @@ Alterar Produto Para Nome Já Utilizado
     [Arguments]    ${nome}    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
 
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
+    &{body}    Criar Body Produto    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
-    ${body}    Create Dictionary
-    ...    nome=${nome}
-    ...    preco=${preco}
-    ...    descricao=${descricao}
-    ...    quantidade=${quantidade}
-
-    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    PUT    url=${URL}/produtos/${ID_PRODUTO}    json=&{body}    expected_status=${status_esperado}    headers=&{headers}
 
 Alterar Produto Invalido
     [Arguments]    ${preco}    ${descricao}    ${quantidade}    ${status_esperado}
 
     &{headers}    Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
-
     ${nome}    Generate Random String    length=10    chars=[LETTERS]
+    &{body}    Criar Body Produto    ${nome}    ${preco}    ${descricao}    ${quantidade}
 
-    ${body}    Create Dictionary
-    ...    nome=${nome}
-    ...    preco=${preco}
-    ...    descricao=${descricao}
-    ...    quantidade=${quantidade}
-
-    PUT    url=${URL}/produtos/id_invalido    json=${body}    expected_status=${status_esperado}    headers=&{headers}
+    PUT    url=${URL}/produtos/id_invalido    json=&{body}    expected_status=${status_esperado}    headers=&{headers}
 
 #---DELETE---
 Excluir Produto
@@ -215,11 +195,7 @@ Cadastrar Novo Carrinho
     [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     &{headers}     Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
-
-    &{produto1}    Create Dictionary    idProduto=${idProduto1}    quantidade=${quantidade1}
-    &{produto2}    Create Dictionary    idProduto=${idProduto2}    quantidade=${quantidade2}
-    @{produtos}    Create List          ${produto1}    ${produto2}
-    &{body}        Create Dictionary    produtos=${produtos}
+    &{body}    Criar Body Carrinho    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     ${response}    POST    url=${URL}/carrinhos    json=&{body}    expected_status=201    headers=&{headers}
 
@@ -230,11 +206,7 @@ Cadastrar Novo Carrinho Sem Token Válido
     [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     &{headers}     Create Dictionary    Authorization=Bearer token_invalido    Content-Type=application/json
-
-    &{produto1}    Create Dictionary    idProduto=${idProduto1}    quantidade=${quantidade1}
-    &{produto2}    Create Dictionary    idProduto=${idProduto2}    quantidade=${quantidade2}
-    @{produtos}    Create List          ${produto1}    ${produto2}
-    &{body}        Create Dictionary    produtos=${produtos}
+    &{body}    Criar Body Carrinho    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     ${response}    POST    url=${URL}/carrinhos    json=&{body}    expected_status=401    headers=&{headers}
 
@@ -242,11 +214,7 @@ Cadastrar Novo Carrinho Inválido
     [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     &{headers}     Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
-
-    &{produto1}    Create Dictionary    idProduto=${idProduto1}    quantidade=${quantidade1}
-    &{produto2}    Create Dictionary    idProduto=${idProduto2}    quantidade=${quantidade2}
-    @{produtos}    Create List          ${produto1}    ${produto2}
-    &{body}        Create Dictionary    produtos=${produtos}
+    &{body}    Criar Body Carrinho    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     ${response}    POST    url=${URL}/carrinhos    json=&{body}    expected_status=400    headers=&{headers}
 
@@ -254,11 +222,7 @@ Cadastrar Carrinho Novamente
     [Arguments]    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     &{headers}     Create Dictionary    Authorization=Bearer ${TOKEN}    Content-Type=application/json
-
-    &{produto1}    Create Dictionary    idProduto=${idProduto1}    quantidade=${quantidade1}
-    &{produto2}    Create Dictionary    idProduto=${idProduto2}    quantidade=${quantidade2}
-    @{produtos}    Create List          ${produto1}    ${produto2}
-    &{body}        Create Dictionary    produtos=${produtos}
+    &{body}    Criar Body Carrinho    ${idProduto1}    ${quantidade1}    ${idProduto2}    ${quantidade2}
 
     ${response}    POST    url=${URL}/carrinhos    json=&{body}    expected_status=400    headers=&{headers}
 
