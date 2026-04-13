@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation    Essa suíte testa o endpoint /carrinhos da aplicação ServeRest
-Resource    ../resources/ServeRest.resource
+Resource    ../resources/login.resource
+Resource    ../resources/produtos.resource
+Resource    ../resources/carrinho.resource
 Test Setup    Fazer login como admin e garantir que não tenha carrinho já criado
 
 *** Test Cases ***
@@ -64,7 +66,7 @@ TC-08 - Cancelar uma compra com sucesso
     [Tags]    cart    valid    delete
 
     Cadastrar Novo Produto   500   eletrodomesticos   105
-    Cadastrar Novo Carrinho                          BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
+    Cadastrar Novo Carrinho  BeeJh5lz3k6kSIzA    5    ${ID_PRODUTO}    10
     Verificar a quantidade de produtos no estoque após criação do carrinho    ${ID_PRODUTO}
     Cancelar uma compra
     Verificar se os produtos retornaram ao estoque    ${ID_PRODUTO}

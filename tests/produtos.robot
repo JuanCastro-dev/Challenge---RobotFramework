@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation    Essa suíte testa o endpoint /produtos da aplicação ServeRest
-Resource         ../resources/ServeRest.resource
+Resource    ../resources/login.resource
+Resource    ../resources/produtos.resource
+Resource    ../resources/carrinho.resource
 Test Setup       Fazer login como admin
 
 *** Test Cases ***

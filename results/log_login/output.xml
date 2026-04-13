@@ -1,233 +1,238 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-03-19T10:31:12.753628" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-04-13T09:33:50.953865" rpa="false" schemaversion="5">
 <suite id="s1" name="Login" source="C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\tests\login.robot">
 <test id="s1-t1" name="Tl-01 - Login válido" line="6">
-<kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="ServeRest" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Fazer login com o email &quot;fulano@qa.com&quot; e a senha &quot;teste&quot;" owner="login" source_name="Fazer login com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:31:12.936854" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
+<msg time="2026-04-13T09:33:51.313560" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': 'teste'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:31:12.936442" elapsed="0.000440"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:31:12.937135" level="INFO">{'email': 'fulano@qa.com', 'password': 'teste'}</msg>
-<arg>${body}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:31:12.936987" elapsed="0.000180"/>
+<status status="PASS" start="2026-04-13T09:33:51.313118" elapsed="0.000475"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:31:14.626931" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:33:52.313660" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '47', 'Content-Type': 'application/json'} 
  body=b'{"email": "fulano@qa.com", "password": "teste"}' 
  </msg>
-<msg time="2026-03-19T10:31:14.627196" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:33:52.313948" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=200, reason=OK 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'd52e1c0bed5b8f07be938bb7ea7dfb07;o=1', 'date': 'Thu, 19 Mar 2026 13:31:25 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'b096ba8c50bab5d13db69bf973826dd5', 'date': 'Mon, 13 Apr 2026 12:34:12 GMT', 'server': 'Google Frontend', 'Content-Length': '265'} 
  body={
     "message": "Login realizado com sucesso",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MDg1LCJleHAiOjE3NzM5Mjc2ODV9.Vy7Vh9FUBM1dcGDDwVSjdIWC1IYQeTK_3QhqCBDzQzU"
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc2MDgzNjUyLCJleHAiOjE3NzYwODQyNTJ9.WJy4wGpDquf669WZ2keO93C8qeOE2ljuR_1pK49oems"
 } 
  </msg>
-<msg time="2026-03-19T10:31:14.627489" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
+<msg time="2026-04-13T09:33:52.314281" level="INFO">${login_response} = &lt;Response [200]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=200</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:31:12.937237" elapsed="1.690316"/>
+<status status="PASS" start="2026-04-13T09:33:51.313718" elapsed="1.000646"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:31:14.629378" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MDg1LCJleHAiOjE3NzM...</msg>
+<msg time="2026-04-13T09:33:52.316664" level="INFO">${login_response_json} = {'message': 'Login realizado com sucesso', 'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc2MDgzNjUyLCJleHAiOjE3NzY...</msg>
 <var>${login_response_json}</var>
 <arg>${login_response.json()}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-03-19T10:31:14.627919" elapsed="0.001525"/>
-</kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>${login_response_json}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2026-03-19T10:31:14.629695" elapsed="0.000931"/>
+<status status="PASS" start="2026-04-13T09:33:52.314810" elapsed="0.001955"/>
 </kw>
 <kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-03-19T10:31:14.633228" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MDg1LCJleHAiOjE3NzM5Mjc2ODV9.Vy7Vh9FUBM1dcGDDwVSjdIWC1IYQeTK_3QhqCBDzQzU</msg>
+<msg time="2026-04-13T09:33:52.319850" level="INFO">${TOKEN} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc2MDgzNjUyLCJleHAiOjE3NzYwODQyNTJ9.WJy4wGpDquf669WZ2keO93C8qeOE2ljuR_1pK49oems</msg>
 <arg>${TOKEN}</arg>
 <arg>${login_response_json["authorization"]}</arg>
 <doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-03-19T10:31:14.630969" elapsed="0.002365"/>
+<status status="PASS" start="2026-04-13T09:33:52.317113" elapsed="0.002867"/>
 </kw>
 <variable name="${TOKEN}" scope="TEST">
-<msg time="2026-03-19T10:31:14.634202" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MDg1LCJleHAiOjE3NzM5Mjc2ODV9.Vy7Vh9FUBM1dcGDDwVSjdIWC1IYQeTK_3QhqCBDzQzU</msg>
+<msg time="2026-04-13T09:33:52.320948" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzc2MDgzNjUyLCJleHAiOjE3NzYwODQyNTJ9.WJy4wGpDquf669WZ2keO93C8qeOE2ljuR_1pK49oems</msg>
 <var>${TOKEN.replace("Bearer","").replace(" ","")}</var>
-<status status="PASS" start="2026-03-19T10:31:14.633484" elapsed="0.000776"/>
+<status status="PASS" start="2026-04-13T09:33:52.320137" elapsed="0.000878"/>
 </variable>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:31:14.634962" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzczOTI3MDg1LCJleHAiOjE3NzM5Mjc2ODV9.Vy7Vh9FUBM1dcGDDwVSjdIWC1IYQeTK_3QhqCBDzQzU</msg>
-<arg>${TOKEN}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:31:14.634522" elapsed="0.000532"/>
-</kw>
-<status status="PASS" start="2026-03-19T10:31:12.935475" elapsed="1.699722"/>
+<status status="PASS" start="2026-04-13T09:33:51.312254" elapsed="1.008977"/>
 </kw>
 <doc>Realizar login com dados válidos e usuário cadastrado</doc>
 <tag>login</tag>
 <tag>valid</tag>
-<status status="PASS" start="2026-03-19T10:31:12.933379" elapsed="1.702892"/>
+<status status="PASS" start="2026-04-13T09:33:51.311417" elapsed="1.010490"/>
 </test>
 <test id="s1-t2" name="Tl-02 - Login com dados inválidos" line="11">
-<kw name="Fazer login inválido com o email &quot;teste.&quot; e a senha &quot;&quot;" owner="ServeRest" source_name="Fazer login inválido com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Fazer login inválido com o email &quot;teste.&quot; e a senha &quot;&quot;" owner="login" source_name="Fazer login inválido com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:31:14.641032" level="INFO">${body} = {'email': 'teste.', 'password': ''}</msg>
+<msg time="2026-04-13T09:33:52.325729" level="INFO">${body} = {'email': 'teste.', 'password': ''}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:31:14.640254" elapsed="0.000842"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:31:14.641838" level="INFO">{'email': 'teste.', 'password': ''}</msg>
-<arg>${body}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:31:14.641355" elapsed="0.000575"/>
+<status status="PASS" start="2026-04-13T09:33:52.324932" elapsed="0.000858"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:31:15.155011" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:34:01.581803" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '35', 'Content-Type': 'application/json'} 
  body=b'{"email": "teste.", "password": ""}' 
  </msg>
-<msg time="2026-03-19T10:31:15.155230" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:34:01.582010" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=400, reason=Bad Request 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '99afc6bd263826fabe938bb7ea7dfc5f', 'date': 'Thu, 19 Mar 2026 13:31:26 GMT', 'server': 'Google Frontend', 'Content-Length': '104'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '686f399a3f99e9383db69bf973826a24', 'date': 'Mon, 13 Apr 2026 12:34:22 GMT', 'server': 'Google Frontend', 'Content-Length': '104'} 
  body={
     "email": "email deve ser um email válido",
     "password": "password não pode ficar em branco"
 } 
  </msg>
-<msg time="2026-03-19T10:31:15.155558" level="INFO">${login_response} = &lt;Response [400]&gt;</msg>
+<msg time="2026-04-13T09:34:01.582501" level="INFO">${login_response} = &lt;Response [400]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=${status_esperado}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:31:14.642148" elapsed="0.513470"/>
+<status status="PASS" start="2026-04-13T09:33:52.326034" elapsed="9.256726"/>
 </kw>
 <arg>400</arg>
-<status status="PASS" start="2026-03-19T10:31:14.639463" elapsed="0.516372"/>
+<status status="PASS" start="2026-04-13T09:33:52.324235" elapsed="9.258821"/>
 </kw>
 <doc>Realizar login com dados inválidos</doc>
 <tag>invalid</tag>
 <tag>login</tag>
-<status status="PASS" start="2026-03-19T10:31:14.637919" elapsed="0.519035"/>
+<status status="PASS" start="2026-04-13T09:33:52.322968" elapsed="9.260683"/>
 </test>
 <test id="s1-t3" name="Tl-03 - Login com usuário não cadastrado" line="16">
-<kw name="Fazer login inválido com o email &quot;testesemuser@email.com&quot; e a senha &quot;123456&quot;" owner="ServeRest" source_name="Fazer login inválido com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Fazer login inválido com o email &quot;testesemuser@email.com&quot; e a senha &quot;123456&quot;" owner="login" source_name="Fazer login inválido com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:31:15.163086" level="INFO">${body} = {'email': 'testesemuser@email.com', 'password': '123456'}</msg>
+<msg time="2026-04-13T09:34:01.589211" level="INFO">${body} = {'email': 'testesemuser@email.com', 'password': '123456'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:31:15.161976" elapsed="0.001184"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:31:15.163976" level="INFO">{'email': 'testesemuser@email.com', 'password': '123456'}</msg>
-<arg>${body}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:31:15.163441" elapsed="0.000679"/>
+<status status="PASS" start="2026-04-13T09:34:01.588362" elapsed="0.000918"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:31:15.656922" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:34:02.105988" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '57', 'Content-Type': 'application/json'} 
  body=b'{"email": "testesemuser@email.com", "password": "123456"}' 
  </msg>
-<msg time="2026-03-19T10:31:15.657159" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:34:02.106250" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=401, reason=Unauthorized 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '1c9cdf2b822c8779be938bb7ea7dfb4b', 'date': 'Thu, 19 Mar 2026 13:31:26 GMT', 'server': 'Google Frontend', 'Content-Length': '48'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '0d32688894189d9028de122bd175ab4c', 'date': 'Mon, 13 Apr 2026 12:34:22 GMT', 'server': 'Google Frontend', 'Content-Length': '48'} 
  body={
     "message": "Email e/ou senha inválidos"
 } 
  </msg>
-<msg time="2026-03-19T10:31:15.657466" level="INFO">${login_response} = &lt;Response [401]&gt;</msg>
+<msg time="2026-04-13T09:34:02.106544" level="INFO">${login_response} = &lt;Response [401]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=${status_esperado}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:31:15.164393" elapsed="0.493172"/>
+<status status="PASS" start="2026-04-13T09:34:01.589557" elapsed="0.517060"/>
 </kw>
 <arg>401</arg>
-<status status="PASS" start="2026-03-19T10:31:15.160689" elapsed="0.497113"/>
+<status status="PASS" start="2026-04-13T09:34:01.587581" elapsed="0.519260"/>
 </kw>
 <doc>Realizar login com dados inválidos</doc>
 <tag>invalid</tag>
 <tag>login</tag>
-<status status="PASS" start="2026-03-19T10:31:15.159336" elapsed="0.499023"/>
+<status status="PASS" start="2026-04-13T09:34:01.585470" elapsed="0.522166"/>
 </test>
 <test id="s1-t4" name="Tl-04 - Login com senha incorreta" line="21">
-<kw name="Fazer login inválido com o email &quot;fulano@qa.com&quot; e a senha &quot;123456&quot;" owner="ServeRest" source_name="Fazer login inválido com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
+<kw name="Fazer login inválido com o email &quot;fulano@qa.com&quot; e a senha &quot;123456&quot;" owner="login" source_name="Fazer login inválido com o email &quot;${EMAIL}&quot; e a senha &quot;${PASSWORD}&quot;">
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2026-03-19T10:31:15.663603" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': '123456'}</msg>
+<msg time="2026-04-13T09:34:02.111364" level="INFO">${body} = {'email': 'fulano@qa.com', 'password': '123456'}</msg>
 <var>${body}</var>
 <arg>email=${EMAIL}</arg>
 <arg>password=${PASSWORD}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2026-03-19T10:31:15.662775" elapsed="0.000896"/>
-</kw>
-<kw name="Log" owner="BuiltIn">
-<msg time="2026-03-19T10:31:15.664333" level="INFO">{'email': 'fulano@qa.com', 'password': '123456'}</msg>
-<arg>${body}</arg>
-<doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-19T10:31:15.663925" elapsed="0.000561"/>
+<status status="PASS" start="2026-04-13T09:34:02.110569" elapsed="0.000860"/>
 </kw>
 <kw name="POST" owner="RequestsLibrary">
-<msg time="2026-03-19T10:31:16.154001" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:34:02.613460" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
  path_url=/login 
  headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '48', 'Content-Type': 'application/json'} 
  body=b'{"email": "fulano@qa.com", "password": "123456"}' 
  </msg>
-<msg time="2026-03-19T10:31:16.154208" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+<msg time="2026-04-13T09:34:02.613671" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
  status=401, reason=Unauthorized 
- headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'ab04b51475fd8ca1be938bb7ea7df699', 'date': 'Thu, 19 Mar 2026 13:31:27 GMT', 'server': 'Google Frontend', 'Content-Length': '48'} 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'e00f2ff2d268955328de122bd175aeb7', 'date': 'Mon, 13 Apr 2026 12:34:23 GMT', 'server': 'Google Frontend', 'Content-Length': '48'} 
  body={
     "message": "Email e/ou senha inválidos"
 } 
  </msg>
-<msg time="2026-03-19T10:31:16.154535" level="INFO">${login_response} = &lt;Response [401]&gt;</msg>
+<msg time="2026-04-13T09:34:02.613952" level="INFO">${login_response} = &lt;Response [401]&gt;</msg>
 <var>${login_response}</var>
 <arg>url=${URL}/login</arg>
 <arg>json=${body}</arg>
 <arg>expected_status=${status_esperado}</arg>
 <doc>Sends a POST request.</doc>
-<status status="PASS" start="2026-03-19T10:31:15.664692" elapsed="0.489905"/>
+<status status="PASS" start="2026-04-13T09:34:02.111685" elapsed="0.502359"/>
 </kw>
 <arg>401</arg>
-<status status="PASS" start="2026-03-19T10:31:15.662026" elapsed="0.492771"/>
+<status status="PASS" start="2026-04-13T09:34:02.109936" elapsed="0.504316"/>
 </kw>
 <doc>Realizar login com dados inválidos</doc>
 <tag>invalid</tag>
 <tag>login</tag>
-<status status="PASS" start="2026-03-19T10:31:15.660520" elapsed="0.495032"/>
+<status status="PASS" start="2026-04-13T09:34:02.108719" elapsed="0.506900"/>
+</test>
+<test id="s1-t5" name="TL-05 - Login Com Payload Incompleto" line="26">
+<kw name="Fazer login com payload incompleto com o email &quot;fulano@qa.com&quot;" owner="login" source_name="Fazer login com payload incompleto com o email &quot;${EMAIL}&quot;">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-13T09:34:02.620155" level="INFO">${body} = {'email': 'fulano@qa.com'}</msg>
+<var>${body}</var>
+<arg>email=${EMAIL}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-13T09:34:02.619433" elapsed="0.000790"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-04-13T09:34:03.088341" level="INFO">POST Request : url=https://compassuol.serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '26', 'Content-Type': 'application/json'} 
+ body=b'{"email": "fulano@qa.com"}' 
+ </msg>
+<msg time="2026-04-13T09:34:03.088549" level="INFO">POST Response : url=https://compassuol.serverest.dev/login 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '5f912dd43917f00128de122bd175a508', 'date': 'Mon, 13 Apr 2026 12:34:23 GMT', 'server': 'Google Frontend', 'Content-Length': '46'} 
+ body={
+    "password": "password é obrigatório"
+} 
+ </msg>
+<msg time="2026-04-13T09:34:03.088842" level="INFO">${login_response} = &lt;Response [400]&gt;</msg>
+<var>${login_response}</var>
+<arg>url=${URL}/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-04-13T09:34:02.620486" elapsed="0.468420"/>
+</kw>
+<status status="PASS" start="2026-04-13T09:34:02.618792" elapsed="0.470365"/>
+</kw>
+<doc>Realizar login sem informar a senha no payload</doc>
+<tag>genAI</tag>
+<tag>invalid</tag>
+<tag>login</tag>
+<status status="PASS" start="2026-04-13T09:34:02.617437" elapsed="0.472499"/>
 </test>
 <doc>Essa suíte testa o endpoint /login da aplicação ServeRest</doc>
-<status status="PASS" start="2026-03-19T10:31:12.755455" elapsed="3.401552"/>
+<status status="PASS" start="2026-04-13T09:33:50.955607" elapsed="12.135654"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0" skip="0">All Tests</stat>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="3" fail="0" skip="0">invalid</stat>
-<stat pass="4" fail="0" skip="0">login</stat>
+<stat pass="1" fail="0" skip="0">genAI</stat>
+<stat pass="4" fail="0" skip="0">invalid</stat>
+<stat pass="5" fail="0" skip="0">login</stat>
 <stat pass="1" fail="0" skip="0">valid</stat>
 </tag>
 <suite>
-<stat name="Login" id="s1" pass="4" fail="0" skip="0">Login</stat>
+<stat name="Login" id="s1" pass="5" fail="0" skip="0">Login</stat>
 </suite>
 </statistics>
 <errors>
+<msg time="2026-04-13T09:33:51.309640" level="WARN">Error in file 'C:\Users\JuanCastroMendoncaDe\Documents\Fase 2\Challenge - RobotFramework\Challenge---RobotFramework\resources\carrinho.resource' on line 14: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
 </errors>
 </robot>

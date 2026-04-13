@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Essa suíte testa o endpoint /login da aplicação ServeRest
-Resource    ../resources/ServeRest.resource
+Resource    ../resources/login.resource
 
 *** Test Cases ***
 Tl-01 - Login válido
