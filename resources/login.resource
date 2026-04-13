@@ -1,5 +1,6 @@
 *** Settings ***
 Resource    base.robot
+Resource    ../resources/carrinho.resource
 
 *** Variables ***
 ${URL}              https://compassuol.serverest.dev
